@@ -33,3 +33,10 @@ md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar) .md-button[disabled] 
 .p-divisao {
   color: #757575;
 }
+
+.fixed-btn {
+  position: fixed; 
+  bottom: 45px; 
+  right: 24px;
+}
+

@@ -44,6 +44,23 @@
     };
   });
   
+  myApp.directive('individualmente', function(){
+    return {
+      restrict : 'E',
+      templateUrl : "views/individualmente.html",
+      controller : function(){
+        this.topDirections = ['left', 'up'];
+        this.bottomDirections = ['down', 'right'];
+        this.isOpen = false;
+        this.availableModes = ['md-fling', 'md-scale'];
+        this.selectedMode = 'md-fling';
+        this.availableDirections = ['up', 'down', 'left', 'right'];
+        this.selectedDirection = 'up';
+      },
+      controllerAs : 'indCtrl'
+    };
+  });
+  
   myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav){
     $scope.toggleLeft = function(){
       $mdSidenav('left').toggle();
