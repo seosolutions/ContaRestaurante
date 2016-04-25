@@ -1,0 +1,53 @@
+<md-sidenav style="position: fixed" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop md-whiteframe="4">
+  <md-toolbar class="" id="sidenav-toolbar">
+    <div class="md-toolbar-tools">
+       <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+        <md-icon><i class="material-icons">close</i></md-icon>
+      </md-button>
+      <h3>
+        <span>Menu</span>
+      </h3>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+
+  <md-content  layout-padding ng-controller="LeftCtrl">
+    <div>
+      <br>
+      <div layout="row">
+        <div flex='15'>
+          <md-icon><i class="material-icons">group</i></md-icon>
+        </div>
+        <div flex>
+          <strong style="color: #9e9e9e;">Dividir Igualmente</strong>
+        </div>
+      </div>
+      <br>
+      <div layout="row">
+        <div flex='15'>
+          <md-icon><i class="material-icons">group_add</i></md-icon>
+        </div>
+        <div flex>
+          <strong style="color: #9e9e9e;">Dividir Consumo Individual</strong>
+        </div>
+      </div>
+      <br>
+    </div>
+  </md-content>
+  
+  <hr class="sidenav-hr">
+  
+  <md-content  layout-padding ng-controller="LeftCtrl">
+    <div>
+      <br>
+      <div layout="row">
+        <div flex='15'>
+          <md-icon><i class="material-icons">info</i></md-icon>
+        </div>
+        <div flex>
+          <strong style="color: #9e9e9e;">Sobre</strong>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</md-sidenav>

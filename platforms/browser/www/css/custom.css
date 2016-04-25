@@ -1,0 +1,35 @@
+body {
+  background-color: #F2F2F2;
+}
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
+  color: #FFF;
+}
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar) .md-button[disabled] md-icon, md-toolbar.md-hue-2:not(.md-menu-toolbar) .md-button[disabled] md-icon {
+  color: #FFF;
+}
+
+#sidenav-toolbar {
+  background-color: #FFF;
+  color: #757575;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+#sidenav-toolbar i {
+  color: #757575;
+}
+
+.sidenav-hr {
+  border: 0px solid #FFF;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.page-title {
+  color: #757575;
+  text-align: center;
+}
+
+.p-divisao {
+  color: #757575;
+}
