@@ -61,6 +61,48 @@
     };
   });
   
+  myApp.directive('comuns', function(){
+    return {
+      restrict : 'E',
+      templateUrl : 'views/comuns.html',
+      controller : function(){
+        this.gastoComun = {
+          nome : "Nome do Item",
+          valor : 0,
+          qtde : 0,
+          pessoas : 0,
+          valorTotal : 0
+        };
+        
+        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
+        
+        console.log(this.gastosComuns);
+        
+        this.limpar = function(){
+          this.gastosComuns = [];
+          sessionStorage.removeItem('gastosComuns');
+        };
+        
+        this.inserir = function(){
+          this.gastoComun.valorTotal = this.gastoComun.valor * this.gastoComun.qtde / this.gastoComun.pessoas;
+          
+          this.gastosComuns.push(this.gastoComun);
+          
+          this.gastoComun = {
+            nome : "Nome do Item",
+            valor : 0,
+            qtde : 0,
+            pessoas : 0,
+            valorTotal : 0
+          };
+          console.log(this.gastosComuns);
+          sessionStorage.setItem('gastosComuns',JSON.stringify(this.gastosComuns));
+        };
+      },
+      controllerAs : 'comunsCtrl'
+    };
+  });
+  
   myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav){
     $scope.toggleLeft = function(){
       $mdSidenav('left').toggle();
