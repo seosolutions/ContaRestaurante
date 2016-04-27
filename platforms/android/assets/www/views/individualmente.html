@@ -21,7 +21,8 @@
     <span class="md-headline p-divisao">Gastos Comuns</span>
   </md-card-title>
   <md-card-content>
-    <p style="font-style: italic;"><small>Nenhum Gasto Inserido...</small></p>
+    <p style="font-style: italic;" ng-show="indCtrl.gastosComuns.length == 0"><small>Nenhum Gasto Inserido...</small></p>
+    <p ng-show="indCtrl.totalGastosComuns > 0"><span class="card-list-header-1">Valor Total:</span> {{indCtrl.totalGastosComuns | currency:"R$ ": 2}}</p>
     <md-card-actions layout="row" layout-align="end center">
       <a href="gastos-comuns.html"><md-button style="color: #4CAF50;">Editar</md-button></a>
     </md-card-actions>

@@ -49,13 +49,21 @@
       restrict : 'E',
       templateUrl : "views/individualmente.html",
       controller : function(){
-        this.topDirections = ['left', 'up'];
+        /*this.topDirections = ['left', 'up'];
         this.bottomDirections = ['down', 'right'];
         this.isOpen = false;
         this.availableModes = ['md-fling', 'md-scale'];
         this.selectedMode = 'md-fling';
         this.availableDirections = ['up', 'down', 'left', 'right'];
-        this.selectedDirection = 'up';
+        this.selectedDirection = 'up';*/
+        
+        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns'));
+        
+        this.totalGastosComuns = 0;
+        for(var i = 0; i < this.gastosComuns.length; i++){
+          this.totalGastosComuns += (this.gastosComuns[i].valor * this.gastosComuns[i].qtde);
+        }
+        
       },
       controllerAs : 'indCtrl'
     };
@@ -97,6 +105,18 @@
           };
           console.log(this.gastosComuns);
           sessionStorage.setItem('gastosComuns',JSON.stringify(this.gastosComuns));
+        };
+        
+        this.deletar = function(gasto){
+          var index = this.gastosComuns.indexOf(gasto);
+          if(index > -1) {
+            this.gastosComuns.splice(index,1);
+            if(this.gastosComuns.length === 0){
+              sessionStorage.removeItem('gastosComuns');
+            }else{
+              sessionStorage.setItem('gastosComuns',JSON.stringify(this.gastosComuns));
+            } 
+          }
         };
       },
       controllerAs : 'comunsCtrl'

@@ -5,11 +5,11 @@
     <label>Nome:</label>
     <input type="text" ng-model="comunsCtrl.gastoComun.nome">
   </md-input-container>
-  <md-input-container class="">
+  <md-input-container class="md-block">
     <label>Valor do Item:</label>
     <input type="number" step="0.01" ng-model="comunsCtrl.gastoComun.valor">
   </md-input-container>
-  <md-input-container class="">
+  <md-input-container class="md-block">
     <label>Quantidade:</label>
     <input type="number" ng-model="comunsCtrl.gastoComun.qtde">
   </md-input-container>
@@ -22,13 +22,15 @@
 <md-button class="md-raised md-primary" ng-click="comunsCtrl.limpar()" >Excluir Todos</md-button>
 <md-button class="md-raised md-primary" ng-click="comunsCtrl.inserir()" >Inserir</md-button>
 
-<md-card class="card-list">
+<md-card class="card-list" ng-show="comunsCtrl.gastosComuns.length > 0">
   <md-card-content>
     <div ng-repeat="gasto in comunsCtrl.gastosComuns track by $index">
       <strong>{{gasto.nome}}</strong>
       <p><span class="card-list-header-1">Valor: </span>{{gasto.valor | currency:"R$ ": 2}} <span class="card-list-header-1">Qtde: </span>{{gasto.qtde}}</p>
-      <p><span class="card-list-header-1">Pessoas: </span>{{gasto.pessoas}} <span class="card-list-header-1">Valor p/Pessop: </span>{{gasto.valorTotal  | currency:"R$ ": 2}}</p>
-      
+      <p><span class="card-list-header-1">Pessoas: </span>{{gasto.pessoas}} <span class="card-list-header-1">Valor p/Pessoa: </span>{{gasto.valorTotal  | currency:"R$ ": 2}}</p>
+      <md-button class="md-icon-button" ng-click="comunsCtrl.deletar(gasto)">
+        <md-icon><i class="material-icons">delete</i></md-icon>
+      </md-button>
       <hr>
     </div>
   </md-card-content>
