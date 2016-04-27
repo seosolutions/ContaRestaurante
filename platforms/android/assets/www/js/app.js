@@ -123,6 +123,49 @@
     };
   });
   
+  myApp.directive('inserirGrupos', function(){
+    return {
+      restrict : 'E',
+      templateUrl : 'views/inserir-grupos.html',
+      controller : function(){
+        this.grupo = {
+          nome : '',
+          gastos : []
+        };
+        
+        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+        
+        this.inserir = function(){
+          this.grupos.push(this.grupo);
+          this.grupo = {
+            nome : '',
+            gastos : []
+          };
+          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+        };
+        
+        this.limpar = function(){
+          this.grupos = [];
+          sessionStorage.removeItem('grupos');
+        };
+        
+        this.deletar = function(grupo){
+          var index = this.grupos.indexOf(grupo);
+          if(index > -1) {
+            this.grupos.splice(index,1);
+            if(this.grupos.length === 0){
+              sessionStorage.removeItem('grupos');
+            }else{
+              sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+            } 
+          }     
+        };
+        
+      },
+      controllerAs : 'igCtrl'
+    };
+  });
+  
   myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav){
     $scope.toggleLeft = function(){
       $mdSidenav('left').toggle();

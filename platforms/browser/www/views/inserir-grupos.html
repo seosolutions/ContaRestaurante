@@ -1,0 +1,27 @@
+<h3 class="page-title">Inserir Grupos:</h3>
+
+<form>
+  <md-input-container class="md-block">
+    <label>Nome:</label>
+    <input type="text" ng-model="igCtrl.grupo.nome">
+  </md-input-container>
+</form>
+
+<md-button class="md-raised md-primary" ng-click="igCtrl.limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="igCtrl.inserir()" >Inserir</md-button>
+
+<md-card class="card-list" ng-show="igCtrl.grupos.length > 0">
+  <md-card-content>
+    <div ng-repeat="grupo in igCtrl.grupos track by $index">
+      <strong>{{grupo.nome}}</strong>
+      
+      <md-button class="md-icon-button" ng-click="">
+        <md-icon><i class="material-icons">edit</i></md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="igCtrl.deletar(grupo)">
+        <md-icon><i class="material-icons">delete</i></md-icon>
+      </md-button>
+      <hr>
+    </div>
+  </md-card-content>
+</md-card>
