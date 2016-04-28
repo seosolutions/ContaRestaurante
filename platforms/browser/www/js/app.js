@@ -127,21 +127,35 @@
     return {
       restrict : 'E',
       templateUrl : 'views/inserir-grupos.html',
-      controller : function(){
+      controller : function($mdToast){
         this.grupo = {
           nome : '',
-          gastos : []
+          gastos : [],
+          valorTotal : 0
         };
         
         this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
         
         this.inserir = function(){
-          this.grupos.push(this.grupo);
-          this.grupo = {
-            nome : '',
-            gastos : []
-          };
-          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+          //Assume que não violação de chave primária
+          var PK_violation = false;
+          //Verifica se o nome do grupo já foi cadastrado
+          for(var i =0; i < this.grupos.length; i++){
+            PK_violation = PK_violation || ( (this.grupos[i].nome === this.grupo.nome) && i);
+            if (PK_violation !== false) break;
+          }
+          //Se a violação for falsa, insere o grupo
+          if(PK_violation === false){
+            this.grupos.push(this.grupo);
+            this.grupo = {
+              nome : '',
+              gastos : [],
+              valorTotal : 0
+            };
+            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));  
+          }else{
+            $mdToast.show( $mdToast.simple().textContent('Grupo Duplicado').hideDelay(3000) );
+          }
         };
         
         this.limpar = function(){
@@ -161,8 +175,59 @@
           }     
         };
         
+        this.editar = function(grupo){
+          sessionStorage.setItem('editarGrupo',JSON.stringify(grupo));
+        };
+        
       },
       controllerAs : 'igCtrl'
+    };
+  });
+  
+  myApp.directive('editarGrupos', function(){
+    return {
+      restrict : 'E',
+      templateUrl : 'views/editar-grupos.html',
+      controller : function(){
+        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+        this.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
+        
+        var index = this.grupos.indexOf(this.grupo);
+        console.log(index);
+        
+        
+        this.gasto = {
+          nome : '',
+          valor : 0,
+          qtde : 0,
+          valorTotal : 0
+        };
+        
+        this.inserir = function(){
+          //Calcula o valor total do gasto
+          this.gasto.valorTotal = this.gasto.valor * this.gasto.qtde;
+          //Atualiza o grupo editado, inserindo o gasto
+          this.grupos[index].gastos.push(this.gasto);
+          //zera o valor total do grupo
+          this.grupos[index].valorTotal = 0;
+          //Atualizar o valor Total do grupo
+          for(var i = 0; i < this.grupos[index].gastos.length; i++){
+            this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
+          }
+          //Grava o Grupo
+          console.log(this.grupos);
+          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+          //Limpa o gasto
+          this.gasto = {
+            nome : '',
+            valor : 0,
+            qtde : 0,
+            valorTotal : 0
+          };
+        };
+        
+      },
+      controllerAs : 'egCtrl'
     };
   });
   
