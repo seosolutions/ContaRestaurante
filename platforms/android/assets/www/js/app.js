@@ -64,6 +64,15 @@
           this.totalGastosComuns += (this.gastosComuns[i].valor * this.gastosComuns[i].qtde);
         }
         
+        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+        
+        this.valorTotalGrupos = 0;
+        for(i=0; i < this.grupos.length; i++){
+          this.valorTotalGrupos += this.grupos[i].valorTotal;
+        }
+        
+        this.totalConta = this.totalGastosComuns + this.valorTotalGrupos;
+        
       },
       controllerAs : 'indCtrl'
     };
@@ -136,6 +145,11 @@
         
         this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
         
+        this.valorTotalGrupos = 0;
+        for(var i=0; i < this.grupos.length; i++){
+          this.valorTotalGrupos += this.grupos[i].valorTotal;
+        }
+        
         this.inserir = function(){
           //Assume que não violação de chave primária
           var PK_violation = false;
@@ -161,12 +175,17 @@
         this.limpar = function(){
           this.grupos = [];
           sessionStorage.removeItem('grupos');
+          this.valorTotalGrupos = 0;
         };
         
         this.deletar = function(grupo){
           var index = this.grupos.indexOf(grupo);
           if(index > -1) {
             this.grupos.splice(index,1);
+            this.valorTotalGrupos = 0;
+            for(var i=0; i < this.grupos.length; i++){
+              this.valorTotalGrupos += this.grupos[i].valorTotal;
+            }
             if(this.grupos.length === 0){
               sessionStorage.removeItem('grupos');
             }else{
@@ -188,14 +207,18 @@
     return {
       restrict : 'E',
       templateUrl : 'views/editar-grupos.html',
-      controller : function(){
+      controller : function($mdToast){
         this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
         this.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
         
-        var index = this.grupos.indexOf(this.grupo);
-        console.log(index);
+        //Encontra o indice do grupo
+        var index = false;
+        for(var i =0; i < this.grupos.length; i++){
+          index = index || ( (this.grupos[i].nome === this.grupo.nome) && i);
+          if (index !== false) break;
+        }
         
-        
+        //Define gasto
         this.gasto = {
           nome : '',
           valor : 0,
@@ -204,28 +227,69 @@
         };
         
         this.inserir = function(){
-          //Calcula o valor total do gasto
-          this.gasto.valorTotal = this.gasto.valor * this.gasto.qtde;
-          //Atualiza o grupo editado, inserindo o gasto
-          this.grupos[index].gastos.push(this.gasto);
-          //zera o valor total do grupo
-          this.grupos[index].valorTotal = 0;
-          //Atualizar o valor Total do grupo
-          for(var i = 0; i < this.grupos[index].gastos.length; i++){
-            this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
+          //Assume que não violação de chave primária
+          var PK_violation = false;
+          //Verifica se o nome do item já foi cadastrado
+          for(var i =0; i < this.grupos[index].gastos.length; i++){
+            PK_violation = PK_violation || ( (this.grupos[index].gastos[i].nome === this.gasto.nome) && i);
+            if (PK_violation !== false) break;
           }
-          //Grava o Grupo
-          console.log(this.grupos);
-          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
-          //Limpa o gasto
-          this.gasto = {
-            nome : '',
-            valor : 0,
-            qtde : 0,
-            valorTotal : 0
-          };
+          //Se a violação for falsa, insere o gasto
+          if(PK_violation === false){
+            //Calcula o valor total do gasto
+            this.gasto.valorTotal = this.gasto.valor * this.gasto.qtde;
+            //Atualiza o grupo editado, inserindo o gasto
+            this.grupos[index].gastos.push(this.gasto);
+            //zera o valor total do grupo
+            this.grupos[index].valorTotal = 0;
+            //Atualizar o valor Total do grupo
+            for(i = 0; i < this.grupos[index].gastos.length; i++){
+              this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
+            }
+            //Atualiza o grupo
+            this.grupo = this.grupos[index];
+            //Grava o Grupo
+            console.log(this.grupos);
+            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+            //Limpa o gasto
+            this.gasto = {
+              nome : '',
+              valor : 0,
+              qtde : 0,
+              valorTotal : 0
+            };
+          }else{
+            $mdToast.show( $mdToast.simple().textContent('Item Duplicado').hideDelay(3000) );  
+          }
         };
         
+        this.limpar = function(){
+          this.grupos[index].gastos = [];
+          this.grupos[index].valorTotal = 0;
+          this.grupo = this.grupos[index];
+          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+        };
+        
+        this.deletar = function(gasto){
+          var ix = false;
+          for(var i =0; i < this.grupos[index].gastos.length; i++){
+            ix = ix || ( (this.grupos[index].gastos[i].nome === gasto.nome) && i);
+            if (ix !== false) break;
+          }
+          
+          if(ix !== false) {
+            this.grupos[index].gastos.splice(ix,1);
+            //zera o valor total do grupo
+            this.grupos[index].valorTotal = 0;
+            //Atualizar o valor Total do grupo
+            for(i = 0; i < this.grupos[index].gastos.length; i++){
+              this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
+            }
+            //Atualiza o grupo
+            this.grupo = this.grupos[index];
+            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
+          }
+        }; 
       },
       controllerAs : 'egCtrl'
     };

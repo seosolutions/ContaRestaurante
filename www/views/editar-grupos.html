@@ -19,3 +19,21 @@
 
 <md-button class="md-raised md-primary" ng-click="egCtrl.limpar()" >Excluir Todos</md-button>
 <md-button class="md-raised md-primary" ng-click="egCtrl.inserir()" >Inserir</md-button>
+
+<p style="color: #9e9e9e;"><strong>Valor Total do Grupo: </strong>{{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>
+<p style="color: #9e9e9e;"><strong>Valor Total do Grupo + 10%: </strong>{{ (egCtrl.grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p> 
+
+<md-card class="card-list" ng-show="egCtrl.grupo.gastos.length > 0">
+  <md-card-content>
+    <div ng-repeat="gasto in egCtrl.grupo.gastos track by $index">
+      <strong>{{gasto.nome}}</strong>
+      <br>
+      <p><span class="card-list-header-1">Valor: </span>{{gasto.valor | currency:"R$ ": 2}} <span class="card-list-header-1">Qtde: </span>{{gasto.qtde}}</p>
+      <p><span class="card-list-header-1">Valor Total: </span>{{gasto.valorTotal | currency:"R$ ": 2}}</p>
+      <md-button class="md-icon-button" ng-click="egCtrl.deletar(gasto)">
+        <md-icon><i class="material-icons">delete</i></md-icon>
+      </md-button>
+      <hr>
+    </div>
+  </md-card-content>
+</md-card>

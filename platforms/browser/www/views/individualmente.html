@@ -1,3 +1,11 @@
+<md-card class="card-toolbar">
+  <md-card-content>
+    <h1>{{(indCtrl.totalConta * 1.1) | currency:"R$ ": 2}}</h1>
+    <p>(Total + 10%)</p>
+    <p ><strong>Total da Conta:</strong> {{indCtrl.totalConta | currency:"R$ ": 2}}</p>
+  </md-card-content>
+</md-card>
+
 <h3 class="page-title">Dividir Consumo Individual:</h3>
 
 <!--<md-fab-speed-dial class="fixed-btn" md-open="indCtrl.isOpen" md-direction="{{indCtrl.selectedDirection}}" ng-class="indCtrl.selectedMode">
@@ -34,7 +42,8 @@
     <span class="md-headline p-divisao">Gastos Individuais</span>
   </md-card-title>
   <md-card-content>
-    <p style="font-style: italic;"><small>Nenhum Grupo Inserido...</small></p>
+    <p style="font-style: italic;" ng-show="indCtrl.grupos.length == 0"><small>Nenhum Grupo Inserido...</small></p>
+    <p ng-show="indCtrl.valorTotalGrupos >= 0"><span class="card-list-header-1">Valor Total:</span> {{indCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
     <md-card-actions layout="row" layout-align="end center">
       <a href="inserir-grupos.html"><md-button style="color: #4CAF50;">Editar</md-button></a>
     </md-card-actions>

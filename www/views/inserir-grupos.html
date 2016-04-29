@@ -10,12 +10,16 @@
 <md-button class="md-raised md-primary" ng-click="igCtrl.limpar()" >Excluir Todos</md-button>
 <md-button class="md-raised md-primary" ng-click="igCtrl.inserir()" >Inserir</md-button>
 
+<p style="color: #9e9e9e;"><strong>Valor Total: </strong>{{igCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
+<p style="color: #9e9e9e;"><strong>Valor Total + 10%: </strong>{{ (igCtrl.valorTotalGrupos * 1.1) | currency:"R$ ": 2}}</p>
+
 <md-card class="card-list" ng-show="igCtrl.grupos.length > 0">
   <md-card-content>
     <div ng-repeat="grupo in igCtrl.grupos track by $index">
       <strong>{{grupo.nome}}</strong>
       <br>
       <p><span class="card-list-header-1">Valor: </span>{{grupo.valorTotal | currency:"R$ ": 2}}</p>
+      <p><span class="card-list-header-1">Valor + 10%: </span>{{ (grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p>
       <a href="editar-grupos.html" style="text-decoration: none;">
         <md-button class="md-icon-button" ng-click="igCtrl.editar(grupo)">
           <md-icon><i class="material-icons">edit</i></md-icon>
