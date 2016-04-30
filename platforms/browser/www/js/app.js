@@ -71,8 +71,6 @@
           this.valorTotalGrupos += this.grupos[i].valorTotal;
         }
         
-        this.totalConta = this.totalGastosComuns + this.valorTotalGrupos;
-        
       },
       controllerAs : 'indCtrl'
     };

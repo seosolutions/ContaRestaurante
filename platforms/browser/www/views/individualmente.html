@@ -1,8 +1,8 @@
 <md-card class="card-toolbar">
   <md-card-content>
-    <h1>{{(indCtrl.totalConta * 1.1) | currency:"R$ ": 2}}</h1>
+    <h1>{{(indCtrl.valorTotalGrupos * 1.1) | currency:"R$ ": 2}}</h1>
     <p>(Total + 10%)</p>
-    <p ><strong>Total da Conta:</strong> {{indCtrl.totalConta | currency:"R$ ": 2}}</p>
+    <p ><strong>Total da Conta:</strong> {{indCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
   </md-card-content>
 </md-card>
 
@@ -43,7 +43,7 @@
   </md-card-title>
   <md-card-content>
     <p style="font-style: italic;" ng-show="indCtrl.grupos.length == 0"><small>Nenhum Grupo Inserido...</small></p>
-    <p ng-show="indCtrl.valorTotalGrupos >= 0"><span class="card-list-header-1">Valor Total:</span> {{indCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
+    <p ng-show="indCtrl.grupos.length > 0"><span class="card-list-header-1">Valor Total:</span> {{indCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
     <md-card-actions layout="row" layout-align="end center">
       <a href="inserir-grupos.html"><md-button style="color: #4CAF50;">Editar</md-button></a>
     </md-card-actions>

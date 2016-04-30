@@ -1,3 +1,11 @@
+<md-card class="card-toolbar">
+  <md-card-content>
+    <h1>{{(egCtrl.grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</h1>
+    <p>(Total + 10%)</p>
+    <p ><strong>Total da Conta:</strong> {{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>
+  </md-card-content>
+</md-card>
+
 <h3 class="page-title">Editar Grupo: {{egCtrl.grupo.nome}}</h3>
 
 <form>
@@ -20,8 +28,10 @@
 <md-button class="md-raised md-primary" ng-click="egCtrl.limpar()" >Excluir Todos</md-button>
 <md-button class="md-raised md-primary" ng-click="egCtrl.inserir()" >Inserir</md-button>
 
+<!--
 <p style="color: #9e9e9e;"><strong>Valor Total do Grupo: </strong>{{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>
 <p style="color: #9e9e9e;"><strong>Valor Total do Grupo + 10%: </strong>{{ (egCtrl.grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p> 
+-->
 
 <md-card class="card-list" ng-show="egCtrl.grupo.gastos.length > 0">
   <md-card-content>
