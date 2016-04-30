@@ -224,6 +224,24 @@
           valorTotal : 0
         };
         
+        this.showGastosComuns = false;
+        this.gastoComun = "none";
+        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
+        
+        this.selectGastoComun = function(gasto){
+          this.gasto.nome = gasto.nome;
+          this.gasto.valor = gasto.valorTotal;
+        };
+        
+        this.selectNone = function(){
+          this.gasto = {
+            nome : '',
+            valor : 0,
+            qtde : 0,
+            valorTotal : 0
+          };
+        };
+        
         this.inserir = function(){
           //Assume que não violação de chave primária
           var PK_violation = false;

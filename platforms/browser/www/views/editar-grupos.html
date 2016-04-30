@@ -8,6 +8,19 @@
 
 <h3 class="page-title">Editar Grupo: {{egCtrl.grupo.nome}}</h3>
 
+<md-input-container class="md-block">
+  <md-checkbox ng-model="egCtrl.showGastosComuns">
+    Mostrar Gastos Comuns
+  </md-checkbox>
+</md-input-container>
+
+<div ng-show="egCtrl.showGastosComuns">
+  <md-radio-group ng-model="egCtrl.gastoComun">
+    <md-radio-button value="none" ng-click="egCtrl.selectNone()"> Nenhum </md-radio-button>
+    <md-radio-button value="{{gasto.nome}}" ng-repeat="gasto in egCtrl.gastosComuns" ng-click="egCtrl.selectGastoComun(gasto)"> {{gasto.nome}} </md-radio-button>
+  </md-radio-group>
+</div>
+
 <form>
   <md-input-container class="md-block">
     <label>Intem Consumido:</label>
