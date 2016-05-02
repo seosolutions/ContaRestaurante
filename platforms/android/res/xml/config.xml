@@ -62,10 +62,16 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <splash density="port-ldpi" src="www/res/screen/android/drawable-port-ldpi-screen.png" />
+    <splash density="port-mdpi" src="www/res/screen/android/drawable-port-mdpi-screen.png" />
+    <splash density="port-hdpi" src="www/res/screen/android/drawable-port-hdpi-screen.png" />
+    <splash density="port-xhdpi" src="www/res/screen/android/drawable-port-xhdpi-screen.png" />
+    <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
+    <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     <allow-intent href="market:*" />
     <name>Conta-Restaurante</name>
     <description>
-        Aplicativo para ajudar  a dividir a conta no restaurante.
+        Aplicativo para ajudar a dividir a conta no restaurante.
     </description>
     <author email="ilton.sequeira.s@gmail.com" href="http://iltons.io">
         IltonS
@@ -73,6 +79,8 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
+    <preference name="SplashScreenDelay" value="8000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <icon src="icon.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
