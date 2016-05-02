@@ -8,7 +8,7 @@
     </feature>
     <name>Conta-Restaurante</name>
     <description>
-        Aplicativo para ajudar  a dividir a conta no restaurante.
+        Aplicativo para ajudar a dividir a conta no restaurante.
     </description>
     <author email="ilton.sequeira.s@gmail.com" href="http://iltons.io">
         IltonS
@@ -24,4 +24,6 @@
     <allow-intent href="geo:*" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
+    <preference name="SplashScreenDelay" value="8000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
 </widget>

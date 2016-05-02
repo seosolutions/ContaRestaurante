@@ -311,9 +311,31 @@
     };
   });
   
-  myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav){
+  myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav, $mdDialog){
     $scope.toggleLeft = function(){
       $mdSidenav('left').toggle();
+    };
+    
+    $scope.showSobreDialog = function(ev) {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+      $mdDialog.show({
+        //controller: DialogController,
+        controller: function($scope, $mdDialog, $mdSidenav){
+          $mdSidenav('left').toggle();
+        },
+        templateUrl: 'views/sobre.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen:false
+        //fullscreen: useFullScreen
+      });
+      
+      $scope.$watch(function() {
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+      });
     };
   });
   
