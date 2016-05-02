@@ -23,7 +23,14 @@
 </head>
 <body ng-controller="AppCtrl" ng-cloak>
   
-  <div>
+  <div id="loading">
+    <br>
+    <div layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+    </div>
+  </div>
+  
+  <div id="content" style="display: none;">
     <div layout="row">
       <div flex>
         <toolbar></toolbar>
@@ -60,6 +67,14 @@
 		}
 
 		document.addEventListener("deviceready", onDeviceReady, false);
+	</script>
+	<script>
+	  window.onload = function(){
+	    setTimeout(function(){
+	      document.getElementById('loading').style.display = 'none';
+	      document.getElementById('content').style.display = 'block';
+	    }, 2000);
+	  };
 	</script>
 </body>
 </html>
