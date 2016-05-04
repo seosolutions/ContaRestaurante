@@ -82,7 +82,7 @@
     <preference name="SplashScreenDelay" value="8000" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <icon src="icon.png" />
-    <access origin="*" />
+    <access browserOnly="true" origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
