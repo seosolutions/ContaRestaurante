@@ -62,6 +62,10 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="AdMob">
+        <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <splash density="port-ldpi" src="www/res/screen/android/drawable-port-ldpi-screen.png" />
     <splash density="port-mdpi" src="www/res/screen/android/drawable-port-mdpi-screen.png" />
     <splash density="port-hdpi" src="www/res/screen/android/drawable-port-hdpi-screen.png" />
@@ -69,11 +73,11 @@
     <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     <allow-intent href="market:*" />
-    <name>Conta-Restaurante</name>
+    <name>Conta Restaurante</name>
     <description>
-        Aplicativo para ajudar a dividir a conta no restaurante.
+        O Conta Restaurante é um aplicativo para ajudar a dividir a conta, em um restaurante ou bar, entre seus amigos e convidados.
     </description>
-    <author email="ilton.sequeira.s@gmail.com" href="http://iltons.io">
+    <author email="contarestaurante.suporte@gmail.com" href="http://iltons.io/contarestaurante">
         IltonS
     </author>
     <content src="index.html" />

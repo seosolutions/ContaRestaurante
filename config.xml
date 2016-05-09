@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.iltons.contarestaurante" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Conta-Restaurante</name>
+    <name>Conta Restaurante</name>
     <description>
-        Aplicativo para ajudar a dividir a conta no restaurante.
+        O Conta Restaurante é um aplicativo para ajudar a dividir a conta, em um restaurante ou bar, entre seus amigos e convidados.
     </description>
-    <author email="ilton.sequeira.s@gmail.com" href="http://iltons.io">
+    <author email="contarestaurante.suporte@gmail.com" href="http://iltons.io/contarestaurante">
         IltonS
     </author>
     <content src="index.html" />
@@ -32,6 +32,8 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+    <plugin name="cordova-plugin-admob" source="npm" />
+    
     <icon src="icon.png" />
     <platform name="android">
         <splash density="port-ldpi" src="www/res/screen/android/drawable-port-ldpi-screen.png" />

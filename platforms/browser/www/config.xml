@@ -6,11 +6,11 @@
     <feature name="Device">
         <param name="browser-package" value="Device" />
     </feature>
-    <name>Conta-Restaurante</name>
+    <name>Conta Restaurante</name>
     <description>
-        Aplicativo para ajudar a dividir a conta no restaurante.
+        O Conta Restaurante é um aplicativo para ajudar a dividir a conta, em um restaurante ou bar, entre seus amigos e convidados.
     </description>
-    <author email="ilton.sequeira.s@gmail.com" href="http://iltons.io">
+    <author email="contarestaurante.suporte@gmail.com" href="http://iltons.io/contarestaurante">
         IltonS
     </author>
     <content src="index.html" />

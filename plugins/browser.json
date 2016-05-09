@@ -63,10 +63,16 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.iltons.contarestaurante"
+        },
+        "cordova-plugin-admobpro": {
+            "PACKAGE_NAME": "io.iltons.contarestaurante"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "io.iltons.contarestaurante"
+        },
+        "cordova-plugin-extension": {
             "PACKAGE_NAME": "io.iltons.contarestaurante"
         }
     }
