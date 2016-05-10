@@ -8,6 +8,10 @@
 
 <h3 class="page-title">Editar Grupo: {{egCtrl.grupo.nome}}</h3>
 
+<md-button class="md-raised md-primary" ng-click="egCtrl.limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="egCtrl.inserir()" >Inserir</md-button>
+
+
 <md-input-container class="md-block">
   <md-checkbox ng-model="egCtrl.showGastosComuns">
     Mostrar Gastos Comuns
@@ -37,9 +41,6 @@
     <input type="number" step="0.01" ng-model="egCtrl.gasto.qtde">
   </md-input-container>
 </form>
-
-<md-button class="md-raised md-primary" ng-click="egCtrl.limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="egCtrl.inserir()" >Inserir</md-button>
 
 <!--
 <p style="color: #9e9e9e;"><strong>Valor Total do Grupo: </strong>{{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>

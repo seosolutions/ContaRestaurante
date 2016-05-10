@@ -1,5 +1,8 @@
 <h3 class="page-title">Gastos Comuns:</h3>
 
+<md-button class="md-raised md-primary" ng-click="comunsCtrl.limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="comunsCtrl.inserir()" >Inserir</md-button>
+
 <form>
   <md-input-container class="md-block">
     <label>Nome:</label>
@@ -18,9 +21,6 @@
     <input type="number" ng-model="comunsCtrl.gastoComun.pessoas">
   </md-input-container>
 </form>
-
-<md-button class="md-raised md-primary" ng-click="comunsCtrl.limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="comunsCtrl.inserir()" >Inserir</md-button>
 
 <md-card class="card-list" ng-show="comunsCtrl.gastosComuns.length > 0">
   <md-card-content>

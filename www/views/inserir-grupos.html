@@ -8,15 +8,15 @@
 
 <h3 class="page-title">Inserir Grupos:</h3>
 
+<md-button class="md-raised md-primary" ng-click="igCtrl.limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="igCtrl.inserir()" >Inserir</md-button>
+
 <form>
   <md-input-container class="md-block">
     <label>Nome:</label>
     <input type="text" ng-model="igCtrl.grupo.nome">
   </md-input-container>
 </form>
-
-<md-button class="md-raised md-primary" ng-click="igCtrl.limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="igCtrl.inserir()" >Inserir</md-button>
 
 <!--
 <p style="color: #9e9e9e;"><strong>Valor Total: </strong>{{igCtrl.valorTotalGrupos | currency:"R$ ": 2}}</p>
