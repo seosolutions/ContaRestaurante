@@ -1,10 +1,38 @@
 (function(){
-  var myApp = angular.module('ContaRestaurante', ['ngMaterial']);
+  var myApp = angular.module('ContaRestaurante', ['ngMaterial', 'ngRoute']);
   
-  myApp.config(function($mdThemingProvider) {
+  myApp.config(function($mdThemingProvider,$routeProvider) {
     $mdThemingProvider.theme('default')
     .primaryPalette('green')
     .accentPalette('grey');
+    
+    //Routes
+    $routeProvider
+    .when('/', {
+      templateUrl : 'views/igualmente.html',
+      controller : 'igualmenteCtrl'
+    })
+    .when('/individualmente',{
+      templateUrl : 'views/individualmente.html',
+      controller : '' 
+    });
+    
+  });
+  
+  myApp.controller('igualmenteCtrl', function($scope){
+    $scope.conta = {
+      valorTotal : 0,
+      gorjeta : "s",
+      totalPessoas : 1
+    };
+    
+    $scope.limpar = function(){
+      $scope.conta = {
+        valorTotal : 0,
+        gorjeta : "s",
+        totalPessoas : 1
+      };
+    };
   });
   
   myApp.directive('toolbar', function(){
@@ -18,29 +46,6 @@
     return {
       restrict : 'E',
       templateUrl : 'partials/sidenav.html'
-    };
-  });
-  
-  myApp.directive('igualmente', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'views/igualmente.html',
-      controller : function(){
-        this.conta = {
-          valorTotal : 0,
-          gorjeta : "s",
-          totalPessoas : 1
-        };
-        
-        this.limpar = function(){
-          this.conta = {
-            valorTotal : 0,
-            gorjeta : "s",
-            totalPessoas : 1
-          };
-        };
-      },
-      controllerAs : 'igualmenteCtrl'
     };
   });
   
