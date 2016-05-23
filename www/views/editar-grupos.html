@@ -1,60 +1,60 @@
 <md-card class="card-toolbar">
   <md-card-content>
-    <h1>{{(egCtrl.grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</h1>
+    <h1>{{(grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</h1>
     <p>(Total + 10%)</p>
-    <p ><strong>Total da Conta:</strong> {{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>
+    <p ><strong>Total da Conta:</strong> {{grupo.valorTotal | currency:"R$ ": 2}}</p>
   </md-card-content>
 </md-card>
 
-<h3 class="page-title">Editar Grupo: {{egCtrl.grupo.nome}}</h3>
+<h3 class="page-title">Editar Grupo: {{grupo.nome}}</h3>
 
-<md-button class="md-raised md-primary" ng-click="egCtrl.limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="egCtrl.inserir()" >Inserir</md-button>
+<md-button class="md-raised md-primary" ng-click="limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="inserir()" >Inserir</md-button>
 
 
 <md-input-container class="md-block">
-  <md-checkbox ng-model="egCtrl.showGastosComuns">
+  <md-checkbox ng-model="showGastosComuns">
     Mostrar Gastos Comuns
   </md-checkbox>
 </md-input-container>
 
-<div ng-show="egCtrl.showGastosComuns">
-  <md-radio-group ng-model="egCtrl.gastoComun">
-    <md-radio-button value="none" ng-click="egCtrl.selectNone()"> Nenhum </md-radio-button>
-    <md-radio-button value="{{gasto.nome}}" ng-repeat="gasto in egCtrl.gastosComuns" ng-click="egCtrl.selectGastoComun(gasto)"> {{gasto.nome}} </md-radio-button>
+<div ng-show="showGastosComuns">
+  <md-radio-group ng-model="gastoComun">
+    <md-radio-button value="none" ng-click="selectNone()"> Nenhum </md-radio-button>
+    <md-radio-button value="{{gasto.nome}}" ng-repeat="gasto in gastosComuns" ng-click="selectGastoComun(gasto)"> {{gasto.nome}} </md-radio-button>
   </md-radio-group>
 </div>
 
 <form>
   <md-input-container class="md-block">
-    <label>Intem Consumido:</label>
-    <input type="text" ng-model="egCtrl.gasto.nome">
+    <label>Item Consumido:</label>
+    <input type="text" ng-model="gasto.nome" id="myAnchor">
   </md-input-container>
   
   <md-input-container class="md-block">
     <label>Valor:</label>
-    <input type="number" step="0.01" ng-model="egCtrl.gasto.valor">
+    <input type="number" step="0.01" ng-model="gasto.valor">
   </md-input-container>
   
   <md-input-container class="md-block">
     <label>Quantidade:</label>
-    <input type="number" step="0.01" ng-model="egCtrl.gasto.qtde">
+    <input type="number" step="0.01" ng-model="gasto.qtde">
   </md-input-container>
 </form>
 
 <!--
-<p style="color: #9e9e9e;"><strong>Valor Total do Grupo: </strong>{{egCtrl.grupo.valorTotal | currency:"R$ ": 2}}</p>
-<p style="color: #9e9e9e;"><strong>Valor Total do Grupo + 10%: </strong>{{ (egCtrl.grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p> 
+<p style="color: #9e9e9e;"><strong>Valor Total do Grupo: </strong>{{grupo.valorTotal | currency:"R$ ": 2}}</p>
+<p style="color: #9e9e9e;"><strong>Valor Total do Grupo + 10%: </strong>{{ (grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p> 
 -->
 
-<md-card class="card-list" ng-show="egCtrl.grupo.gastos.length > 0">
+<md-card class="card-list" ng-show="grupo.gastos.length > 0">
   <md-card-content>
-    <div ng-repeat="gasto in egCtrl.grupo.gastos track by $index">
+    <div ng-repeat="gasto in grupo.gastos track by $index">
       <strong>{{gasto.nome}}</strong>
       <br>
       <p><span class="card-list-header-1">Valor: </span>{{gasto.valor | currency:"R$ ": 2}} <span class="card-list-header-1">Qtde: </span>{{gasto.qtde}}</p>
       <p><span class="card-list-header-1">Valor Total: </span>{{gasto.valorTotal | currency:"R$ ": 2}}</p>
-      <md-button class="md-icon-button" ng-click="egCtrl.deletar(gasto)">
+      <md-button class="md-icon-button" ng-click="deletar(gasto)">
         <md-icon><i class="material-icons">delete</i></md-icon>
       </md-button>
       <hr>

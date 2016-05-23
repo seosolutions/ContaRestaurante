@@ -94,3 +94,7 @@ md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar) .md-button[disabled] 
   color: #FFF;
   margin-top: 0px;
 }
+
+#footer {
+  height: 200px;
+}

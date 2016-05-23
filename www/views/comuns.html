@@ -1,34 +1,34 @@
 <h3 class="page-title">Gastos Comuns:</h3>
 
-<md-button class="md-raised md-primary" ng-click="comunsCtrl.limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="comunsCtrl.inserir()" >Inserir</md-button>
+<md-button class="md-raised md-primary" ng-click="limpar()" >Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="inserir()" >Inserir</md-button>
 
 <form>
   <md-input-container class="md-block">
     <label>Nome:</label>
-    <input type="text" ng-model="comunsCtrl.gastoComun.nome">
+    <input type="text" ng-model="gastoComun.nome" id="myAnchor">
   </md-input-container>
   <md-input-container class="md-block">
     <label>Valor do Item:</label>
-    <input type="number" step="0.01" ng-model="comunsCtrl.gastoComun.valor">
+    <input type="number" step="0.01" ng-model="gastoComun.valor">
   </md-input-container>
   <md-input-container class="md-block">
     <label>Quantidade:</label>
-    <input type="number" ng-model="comunsCtrl.gastoComun.qtde">
+    <input type="number" ng-model="gastoComun.qtde">
   </md-input-container>
   <md-input-container class="md-block">
     <label>Número De Pessoas Para Dividir:</label>
-    <input type="number" ng-model="comunsCtrl.gastoComun.pessoas">
+    <input type="number" ng-model="gastoComun.pessoas">
   </md-input-container>
 </form>
 
-<md-card class="card-list" ng-show="comunsCtrl.gastosComuns.length > 0">
+<md-card class="card-list" ng-show="gastosComuns.length > 0">
   <md-card-content>
-    <div ng-repeat="gasto in comunsCtrl.gastosComuns track by $index">
+    <div ng-repeat="gasto in gastosComuns track by $index">
       <strong>{{gasto.nome}}</strong>
       <p><span class="card-list-header-1">Valor: </span>{{gasto.valor | currency:"R$ ": 2}} <span class="card-list-header-1">Qtde: </span>{{gasto.qtde}}</p>
       <p><span class="card-list-header-1">Pessoas: </span>{{gasto.pessoas}} <span class="card-list-header-1">Valor p/Pessoa: </span>{{gasto.valorTotal  | currency:"R$ ": 2}}</p>
-      <md-button class="md-icon-button" ng-click="comunsCtrl.deletar(gasto)">
+      <md-button class="md-icon-button" ng-click="deletar(gasto)">
         <md-icon><i class="material-icons">delete</i></md-icon>
       </md-button>
       <hr>

@@ -16,7 +16,7 @@
     <p style="font-style: italic;" ng-show="gastosComuns.length == 0"><small>Nenhum Gasto Inserido...</small></p>
     <p ng-show="totalGastosComuns > 0"><span class="card-list-header-1">Valor Total:</span> {{totalGastosComuns | currency:"R$ ": 2}}</p>
     <md-card-actions layout="row" layout-align="end center">
-      <a href="gastos-comuns.html"><md-button style="color: #4CAF50;">Editar</md-button></a>
+      <a href="#gastos-comuns"><md-button style="color: #4CAF50;">Editar</md-button></a>
     </md-card-actions>
   </md-card-content>
 </md-card>
@@ -29,7 +29,7 @@
     <p style="font-style: italic;" ng-show="grupos.length == 0"><small>Nenhum Grupo Inserido...</small></p>
     <p ng-show="grupos.length > 0"><span class="card-list-header-1">Valor Total:</span> {{valorTotalGrupos | currency:"R$ ": 2}}</p>
     <md-card-actions layout="row" layout-align="end center">
-      <a href="inserir-grupos.html"><md-button style="color: #4CAF50;">Editar</md-button></a>
+      <a href="#inserir-grupos"><md-button style="color: #4CAF50;">Editar</md-button></a>
     </md-card-actions>
   </md-card-content>
 </md-card>

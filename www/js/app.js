@@ -12,15 +12,28 @@
       templateUrl : 'views/igualmente.html',
       controller : 'igualmenteCtrl'
     })
-    .when('/individualmente',{
+    .when('/individualmente', {
       templateUrl : 'views/individualmente.html',
       controller : 'individualmenteCtrl' 
+    })
+    .when('/gastos-comuns', {
+      templateUrl : 'views/comuns.html',
+      controller : 'comunsCtrl'
+    })
+    .when('/inserir-grupos', {
+      templateUrl : 'views/inserir-grupos.html',
+      controller : 'igCtrl'
+    })
+    .when('/editar-grupos', {
+      templateUrl : 'views/editar-grupos.html',
+      controller : 'egCtrl'
     })
     .otherwise ({ redirectTo: '/' });
     
   });
   
   myApp.controller('igualmenteCtrl', function($scope,$mdSidenav){
+    window.scrollTo(0,0);
     $mdSidenav('left').close();
     
     $scope.conta = {
@@ -39,6 +52,7 @@
   });
   
   myApp.controller('individualmenteCtrl', function($scope,$mdSidenav){
+    window.scrollTo(0,0);
     $mdSidenav('left').close();
     
     $scope.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns'));
@@ -56,257 +70,229 @@
     }
   });
   
-  myApp.directive('toolbar', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'partials/toolbar.html'
+  myApp.controller('comunsCtrl',function($scope){
+    window.scrollTo(0,0);
+    $scope.gastoComun = {
+      nome : "",
+      valor : 0,
+      qtde : 0,
+      pessoas : 0,
+      valorTotal : 0
     };
-  });
-  
-  myApp.directive('sidenav', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'partials/sidenav.html'
+    
+    $scope.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
+    
+    $scope.limpar = function(){
+      $scope.gastosComuns = [];
+      sessionStorage.removeItem('gastosComuns');
+      $scope.anchor();
     };
-  });
-  
-  
-  myApp.directive('comuns', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'views/comuns.html',
-      controller : function(){
-        this.gastoComun = {
-          nome : "Nome do Item",
-          valor : 0,
-          qtde : 0,
-          pessoas : 0,
-          valorTotal : 0
-        };
-        
-        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
-        
-        console.log(this.gastosComuns);
-        
-        this.limpar = function(){
-          this.gastosComuns = [];
+    
+    $scope.inserir = function(){
+      $scope.gastoComun.valorTotal = $scope.gastoComun.valor * $scope.gastoComun.qtde / $scope.gastoComun.pessoas;
+      
+      $scope.gastosComuns.push($scope.gastoComun);
+      
+      $scope.gastoComun = {
+        nome : "",
+        valor : 0,
+        qtde : 0,
+        pessoas : 0,
+        valorTotal : 0
+      };
+      sessionStorage.setItem('gastosComuns',JSON.stringify($scope.gastosComuns));
+      $scope.anchor();
+    };
+    
+    $scope.deletar = function(gasto){
+      var index = $scope.gastosComuns.indexOf(gasto);
+      if(index > -1) {
+        $scope.gastosComuns.splice(index,1);
+        if($scope.gastosComuns.length === 0){
           sessionStorage.removeItem('gastosComuns');
-        };
-        
-        this.inserir = function(){
-          this.gastoComun.valorTotal = this.gastoComun.valor * this.gastoComun.qtde / this.gastoComun.pessoas;
-          
-          this.gastosComuns.push(this.gastoComun);
-          
-          this.gastoComun = {
-            nome : "Nome do Item",
-            valor : 0,
-            qtde : 0,
-            pessoas : 0,
-            valorTotal : 0
-          };
-          console.log(this.gastosComuns);
-          sessionStorage.setItem('gastosComuns',JSON.stringify(this.gastosComuns));
-        };
-        
-        this.deletar = function(gasto){
-          var index = this.gastosComuns.indexOf(gasto);
-          if(index > -1) {
-            this.gastosComuns.splice(index,1);
-            if(this.gastosComuns.length === 0){
-              sessionStorage.removeItem('gastosComuns');
-            }else{
-              sessionStorage.setItem('gastosComuns',JSON.stringify(this.gastosComuns));
-            } 
-          }
-        };
-      },
-      controllerAs : 'comunsCtrl'
+        }else{
+          sessionStorage.setItem('gastosComuns',JSON.stringify($scope.gastosComuns));
+        } 
+      }
     };
   });
   
-  myApp.directive('inserirGrupos', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'views/inserir-grupos.html',
-      controller : function($mdToast){
-        this.grupo = {
+  myApp.controller('igCtrl', function($scope,$mdToast){
+    window.scrollTo(0,0);
+    $scope.grupo = {
+      nome : '',
+      gastos : [],
+      valorTotal : 0
+    };
+    
+    $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+    
+    $scope.valorTotalGrupos = 0;
+    for(var i=0; i < $scope.grupos.length; i++){
+      $scope.valorTotalGrupos += $scope.grupos[i].valorTotal;
+    }
+    
+    $scope.inserir = function(){
+      //Assume que não violação de chave primária
+      var PK_violation = false;
+      //Verifica se o nome do grupo já foi cadastrado
+      for(var i =0; i < $scope.grupos.length; i++){
+        PK_violation = PK_violation || ( ($scope.grupos[i].nome === $scope.grupo.nome) && i);
+        if (PK_violation !== false) break;
+      }
+      //Se a violação for falsa, insere o grupo
+      if(PK_violation === false){
+        $scope.grupos.push($scope.grupo);
+        $scope.grupo = {
           nome : '',
           gastos : [],
           valorTotal : 0
         };
-        
-        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
-        
-        this.valorTotalGrupos = 0;
-        for(var i=0; i < this.grupos.length; i++){
-          this.valorTotalGrupos += this.grupos[i].valorTotal;
+        sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));  
+      }else{
+        $mdToast.show( $mdToast.simple().textContent('Grupo Duplicado').hideDelay(3000) );
+      }
+    };
+    
+    $scope.limpar = function(){
+      $scope.grupos = [];
+      sessionStorage.removeItem('grupos');
+      $scope.valorTotalGrupos = 0;
+    };
+    
+    $scope.deletar = function(grupo){
+      var index = $scope.grupos.indexOf(grupo);
+      if(index > -1) {
+        $scope.grupos.splice(index,1);
+        $scope.valorTotalGrupos = 0;
+        for(var i=0; i < $scope.grupos.length; i++){
+          $scope.valorTotalGrupos += $scope.grupos[i].valorTotal;
         }
-        
-        this.inserir = function(){
-          //Assume que não violação de chave primária
-          var PK_violation = false;
-          //Verifica se o nome do grupo já foi cadastrado
-          for(var i =0; i < this.grupos.length; i++){
-            PK_violation = PK_violation || ( (this.grupos[i].nome === this.grupo.nome) && i);
-            if (PK_violation !== false) break;
-          }
-          //Se a violação for falsa, insere o grupo
-          if(PK_violation === false){
-            this.grupos.push(this.grupo);
-            this.grupo = {
-              nome : '',
-              gastos : [],
-              valorTotal : 0
-            };
-            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));  
-          }else{
-            $mdToast.show( $mdToast.simple().textContent('Grupo Duplicado').hideDelay(3000) );
-          }
-        };
-        
-        this.limpar = function(){
-          this.grupos = [];
+        if($scope.grupos.length === 0){
           sessionStorage.removeItem('grupos');
-          this.valorTotalGrupos = 0;
-        };
-        
-        this.deletar = function(grupo){
-          var index = this.grupos.indexOf(grupo);
-          if(index > -1) {
-            this.grupos.splice(index,1);
-            this.valorTotalGrupos = 0;
-            for(var i=0; i < this.grupos.length; i++){
-              this.valorTotalGrupos += this.grupos[i].valorTotal;
-            }
-            if(this.grupos.length === 0){
-              sessionStorage.removeItem('grupos');
-            }else{
-              sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
-            } 
-          }     
-        };
-        
-        this.editar = function(grupo){
-          sessionStorage.setItem('editarGrupo',JSON.stringify(grupo));
-        };
-        
-      },
-      controllerAs : 'igCtrl'
+        }else{
+          sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+        } 
+      }     
+    };
+    
+    $scope.editar = function(grupo){
+      sessionStorage.setItem('editarGrupo',JSON.stringify(grupo));
     };
   });
   
-  myApp.directive('editarGrupos', function(){
-    return {
-      restrict : 'E',
-      templateUrl : 'views/editar-grupos.html',
-      controller : function($mdToast){
-        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
-        this.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
-        
-        //Encontra o indice do grupo
-        var index = false;
-        for(var i =0; i < this.grupos.length; i++){
-          index = index || ( (this.grupos[i].nome === this.grupo.nome) && i);
-          if (index !== false) break;
+  myApp.controller('egCtrl', function($scope, $mdToast){
+    window.scrollTo(0,0);
+    $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+    $scope.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
+    
+    //Encontra o indice do grupo
+    var index = false;
+    for(var i =0; i < $scope.grupos.length; i++){
+      index = index || ( ($scope.grupos[i].nome === $scope.grupo.nome) && i);
+      if (index !== false) break;
+    }
+    
+    //Define gasto
+    $scope.gasto = {
+      nome : '',
+      valor : 0,
+      qtde : 0,
+      valorTotal : 0
+    };
+    
+    $scope.showGastosComuns = false;
+    $scope.gastoComun = "none";
+    $scope.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
+    
+    $scope.selectGastoComun = function(gasto){
+      $scope.gasto.nome = gasto.nome;
+      $scope.gasto.valor = gasto.valorTotal;
+    };
+    
+    $scope.selectNone = function(){
+      $scope.gasto = {
+        nome : '',
+        valor : 0,
+        qtde : 0,
+        valorTotal : 0
+      };
+    };
+    
+    $scope.inserir = function(){
+      //Assume que não violação de chave primária
+      var PK_violation = false;
+      //Verifica se o nome do item já foi cadastrado
+      for(var i =0; i < $scope.grupos[index].gastos.length; i++){
+        PK_violation = PK_violation || ( ($scope.grupos[index].gastos[i].nome === $scope.gasto.nome) && i);
+        if (PK_violation !== false) break;
+      }
+      //Se a violação for falsa, insere o gasto
+      if(PK_violation === false){
+        //Calcula o valor total do gasto
+        $scope.gasto.valorTotal = $scope.gasto.valor * $scope.gasto.qtde;
+        //Atualiza o grupo editado, inserindo o gasto
+        $scope.grupos[index].gastos.push($scope.gasto);
+        //zera o valor total do grupo
+        $scope.grupos[index].valorTotal = 0;
+        //Atualizar o valor Total do grupo
+        for(i = 0; i < $scope.grupos[index].gastos.length; i++){
+          $scope.grupos[index].valorTotal += $scope.grupos[index].gastos[i].valorTotal;
         }
-        
-        //Define gasto
-        this.gasto = {
+        //Atualiza o grupo
+        $scope.grupo = $scope.grupos[index];
+        //Grava o Grupo
+        console.log($scope.grupos);
+        sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+        //Limpa o gasto
+        $scope.gasto = {
           nome : '',
           valor : 0,
           qtde : 0,
           valorTotal : 0
         };
-        
-        this.showGastosComuns = false;
-        this.gastoComun = "none";
-        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
-        
-        this.selectGastoComun = function(gasto){
-          this.gasto.nome = gasto.nome;
-          this.gasto.valor = gasto.valorTotal;
-        };
-        
-        this.selectNone = function(){
-          this.gasto = {
-            nome : '',
-            valor : 0,
-            qtde : 0,
-            valorTotal : 0
-          };
-        };
-        
-        this.inserir = function(){
-          //Assume que não violação de chave primária
-          var PK_violation = false;
-          //Verifica se o nome do item já foi cadastrado
-          for(var i =0; i < this.grupos[index].gastos.length; i++){
-            PK_violation = PK_violation || ( (this.grupos[index].gastos[i].nome === this.gasto.nome) && i);
-            if (PK_violation !== false) break;
-          }
-          //Se a violação for falsa, insere o gasto
-          if(PK_violation === false){
-            //Calcula o valor total do gasto
-            this.gasto.valorTotal = this.gasto.valor * this.gasto.qtde;
-            //Atualiza o grupo editado, inserindo o gasto
-            this.grupos[index].gastos.push(this.gasto);
-            //zera o valor total do grupo
-            this.grupos[index].valorTotal = 0;
-            //Atualizar o valor Total do grupo
-            for(i = 0; i < this.grupos[index].gastos.length; i++){
-              this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
-            }
-            //Atualiza o grupo
-            this.grupo = this.grupos[index];
-            //Grava o Grupo
-            console.log(this.grupos);
-            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
-            //Limpa o gasto
-            this.gasto = {
-              nome : '',
-              valor : 0,
-              qtde : 0,
-              valorTotal : 0
-            };
-          }else{
-            $mdToast.show( $mdToast.simple().textContent('Item Duplicado').hideDelay(3000) );  
-          }
-        };
-        
-        this.limpar = function(){
-          this.grupos[index].gastos = [];
-          this.grupos[index].valorTotal = 0;
-          this.grupo = this.grupos[index];
-          sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
-        };
-        
-        this.deletar = function(gasto){
-          var ix = false;
-          for(var i =0; i < this.grupos[index].gastos.length; i++){
-            ix = ix || ( (this.grupos[index].gastos[i].nome === gasto.nome) && i);
-            if (ix !== false) break;
-          }
-          
-          if(ix !== false) {
-            this.grupos[index].gastos.splice(ix,1);
-            //zera o valor total do grupo
-            this.grupos[index].valorTotal = 0;
-            //Atualizar o valor Total do grupo
-            for(i = 0; i < this.grupos[index].gastos.length; i++){
-              this.grupos[index].valorTotal += this.grupos[index].gastos[i].valorTotal;
-            }
-            //Atualiza o grupo
-            this.grupo = this.grupos[index];
-            sessionStorage.setItem('grupos',JSON.stringify(this.grupos));
-          }
-        }; 
-      },
-      controllerAs : 'egCtrl'
+      }else{
+        $mdToast.show( $mdToast.simple().textContent('Item Duplicado').hideDelay(3000) );  
+      }
+      $scope.anchor();
+    };
+    
+    $scope.limpar = function(){
+      $scope.grupos[index].gastos = [];
+      $scope.grupos[index].valorTotal = 0;
+      $scope.grupo = $scope.grupos[index];
+      sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+      $scope.anchor();
+    };
+    
+    $scope.deletar = function(gasto){
+      var ix = false;
+      for(var i =0; i < $scope.grupos[index].gastos.length; i++){
+        ix = ix || ( ($scope.grupos[index].gastos[i].nome === gasto.nome) && i);
+        if (ix !== false) break;
+      }
+      
+      if(ix !== false) {
+        $scope.grupos[index].gastos.splice(ix,1);
+        //zera o valor total do grupo
+        $scope.grupos[index].valorTotal = 0;
+        //Atualizar o valor Total do grupo
+        for(i = 0; i < $scope.grupos[index].gastos.length; i++){
+          $scope.grupos[index].valorTotal += $scope.grupos[index].gastos[i].valorTotal;
+        }
+        //Atualiza o grupo
+        $scope.grupo = $scope.grupos[index];
+        sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+      }
     };
   });
   
   myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav, $mdDialog){
+    $scope.anchor = function(){
+      document.getElementById("myAnchor").focus();
+      document.getElementById("myAnchor").blur();
+    };
+    
     $scope.toggleLeft = function(){
       $mdSidenav('left').toggle();
     };
@@ -341,6 +327,20 @@
         .then(function () {
           $log.debug("close LEFT is done");
         });
+    };
+  });
+  
+  myApp.directive('toolbar', function(){
+    return {
+      restrict : 'E',
+      templateUrl : 'partials/toolbar.html'
+    };
+  });
+  
+  myApp.directive('sidenav', function(){
+    return {
+      restrict : 'E',
+      templateUrl : 'partials/sidenav.html'
     };
   });
   

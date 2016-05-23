@@ -1,14 +1,17 @@
 <h3 class="page-title">Dividir Igualmente:</h3>
+
+<md-button class="md-raised md-primary" ng-click="limpar()" >Limpar</md-button>
+
 <div layout="row">
   <div flex>
     <form>
       <md-input-container class="md-block">
         <label>Valor Total da Conta</label>
-        <input type="number" step="0.01" ng-model="igualmenteCtrl.conta.valorTotal">
+        <input type="number" step="0.01" ng-model="conta.valorTotal">
       </md-input-container>
       
       <md-input-container class="md-block">
-      <md-radio-group ng-model="igualmenteCtrl.conta.gorjeta">
+      <md-radio-group ng-model="conta.gorjeta">
         <md-radio-button value="s" class="md-primary">Valor Já Possui Gorjeta (10%)</md-radio-button>
         <md-radio-button value="n" class="md-primary">Valor Não Possui Gorjeta</md-radio-button>
       </md-radio-group>
@@ -16,7 +19,7 @@
       
       <md-input-container class="md-block">
         <label>Total de Pessoas</label>
-        <input type="number" ng-model="igualmenteCtrl.conta.totalPessoas">
+        <input type="number" ng-model="conta.totalPessoas">
       </md-input-container>
     </form> 
     
@@ -27,15 +30,14 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <p class="p-divisao"><strong>Total Da Conta: </strong>{{igualmenteCtrl.conta.gorjeta=='n' ? igualmenteCtrl.conta.valorTotal : (igualmenteCtrl.conta.valorTotal / 1.1) | currency:"R$ ": 2}}</p>
-        <p class="p-divisao"><strong>Total Da Conta + 10%: </strong>{{igualmenteCtrl.conta.gorjeta=='s' ? igualmenteCtrl.conta.valorTotal : (igualmenteCtrl.conta.valorTotal * 1.1) | currency:"R$ ": 2}}</p>
-        <p class="p-divisao"><strong>Valor Por Pessoa: </strong>{{igualmenteCtrl.conta.gorjeta=='n' ? (igualmenteCtrl.conta.valorTotal / igualmenteCtrl.conta.totalPessoas) : ((igualmenteCtrl.conta.valorTotal / 1.1) / igualmenteCtrl.conta.totalPessoas) | currency:"R$ ": 2}}</p>
-        <p class="p-divisao"><strong>Valor Por Pessoa + 10%: </strong>{{igualmenteCtrl.conta.gorjeta=='s' ? (igualmenteCtrl.conta.valorTotal / igualmenteCtrl.conta.totalPessoas) : ((igualmenteCtrl.conta.valorTotal * 1.1) / igualmenteCtrl.conta.totalPessoas) | currency:"R$ ": 2}}</p>
-        <p class="p-divisao"><strong>Valor Da Gorjeta: </strong>{{igualmenteCtrl.conta.gorjeta=='s' ? (igualmenteCtrl.conta.valorTotal / 1.1 * 0.1) : (igualmenteCtrl.conta.valorTotal * 0.1)  | currency:"R$ ": 2}}</p>
-        <p class="p-divisao"><strong>Valor Da Gorjeta Por Pessoa: </strong>{{igualmenteCtrl.conta.gorjeta=='s' ? (igualmenteCtrl.conta.valorTotal / 1.1 * 0.1 / igualmenteCtrl.conta.totalPessoas) : (igualmenteCtrl.conta.valorTotal * 0.1 / igualmenteCtrl.conta.totalPessoas)  | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Total Da Conta: </strong>{{conta.gorjeta=='n' ? conta.valorTotal : (conta.valorTotal / 1.1) | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Total Da Conta + 10%: </strong>{{conta.gorjeta=='s' ? conta.valorTotal : (conta.valorTotal * 1.1) | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Valor Por Pessoa: </strong>{{conta.gorjeta=='n' ? (conta.valorTotal / conta.totalPessoas) : ((conta.valorTotal / 1.1) / conta.totalPessoas) | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Valor Por Pessoa + 10%: </strong>{{conta.gorjeta=='s' ? (conta.valorTotal / conta.totalPessoas) : ((conta.valorTotal * 1.1) / conta.totalPessoas) | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Valor Da Gorjeta: </strong>{{conta.gorjeta=='s' ? (conta.valorTotal / 1.1 * 0.1) : (conta.valorTotal * 0.1)  | currency:"R$ ": 2}}</p>
+        <p class="p-divisao"><strong>Valor Da Gorjeta Por Pessoa: </strong>{{conta.gorjeta=='s' ? (conta.valorTotal / 1.1 * 0.1 / conta.totalPessoas) : (conta.valorTotal * 0.1 / conta.totalPessoas)  | currency:"R$ ": 2}}</p>
       </md-card-content>
     </md-card>
     
-    <md-button class="md-raised md-primary" ng-click="igualmenteCtrl.limpar()" >Limpar</md-button>
   </div>
 </div>
