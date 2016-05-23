@@ -14,12 +14,15 @@
     })
     .when('/individualmente',{
       templateUrl : 'views/individualmente.html',
-      controller : '' 
-    });
+      controller : 'individualmenteCtrl' 
+    })
+    .otherwise ({ redirectTo: '/' });
     
   });
   
-  myApp.controller('igualmenteCtrl', function($scope){
+  myApp.controller('igualmenteCtrl', function($scope,$mdSidenav){
+    $mdSidenav('left').close();
+    
     $scope.conta = {
       valorTotal : 0,
       gorjeta : "s",
@@ -33,6 +36,24 @@
         totalPessoas : 1
       };
     };
+  });
+  
+  myApp.controller('individualmenteCtrl', function($scope,$mdSidenav){
+    $mdSidenav('left').close();
+    
+    $scope.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns'));
+        
+    $scope.totalGastosComuns = 0;
+    for(var i = 0; i < $scope.gastosComuns.length; i++){
+      $scope.totalGastosComuns += ($scope.gastosComuns[i].valor * $scope.gastosComuns[i].qtde);
+    }
+    
+    $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+    
+    $scope.valorTotalGrupos = 0;
+    for(i=0; i < $scope.grupos.length; i++){
+      $scope.valorTotalGrupos += $scope.grupos[i].valorTotal;
+    }
   });
   
   myApp.directive('toolbar', function(){
@@ -49,37 +70,6 @@
     };
   });
   
-  myApp.directive('individualmente', function(){
-    return {
-      restrict : 'E',
-      templateUrl : "views/individualmente.html",
-      controller : function(){
-        /*this.topDirections = ['left', 'up'];
-        this.bottomDirections = ['down', 'right'];
-        this.isOpen = false;
-        this.availableModes = ['md-fling', 'md-scale'];
-        this.selectedMode = 'md-fling';
-        this.availableDirections = ['up', 'down', 'left', 'right'];
-        this.selectedDirection = 'up';*/
-        
-        this.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns'));
-        
-        this.totalGastosComuns = 0;
-        for(var i = 0; i < this.gastosComuns.length; i++){
-          this.totalGastosComuns += (this.gastosComuns[i].valor * this.gastosComuns[i].qtde);
-        }
-        
-        this.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
-        
-        this.valorTotalGrupos = 0;
-        for(i=0; i < this.grupos.length; i++){
-          this.valorTotalGrupos += this.grupos[i].valorTotal;
-        }
-        
-      },
-      controllerAs : 'indCtrl'
-    };
-  });
   
   myApp.directive('comuns', function(){
     return {
