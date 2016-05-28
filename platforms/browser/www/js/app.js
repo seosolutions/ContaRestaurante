@@ -1,3 +1,5 @@
+//Launch this as an app: 
+// "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --app=http://localhost/ContaRestaurante/www/
 (function(){
   var myApp = angular.module('ContaRestaurante', ['ngMaterial', 'ngRoute']);
   
@@ -37,16 +39,16 @@
     $mdSidenav('left').close();
     
     $scope.conta = {
-      valorTotal : 0,
+      valorTotal : '',
       gorjeta : "s",
-      totalPessoas : 1
+      totalPessoas : ''
     };
     
     $scope.limpar = function(){
       $scope.conta = {
-        valorTotal : 0,
+        valorTotal : '',
         gorjeta : "s",
-        totalPessoas : 1
+        totalPessoas : ''
       };
     };
   });
@@ -73,11 +75,11 @@
   myApp.controller('comunsCtrl',function($scope){
     window.scrollTo(0,0);
     $scope.gastoComun = {
-      nome : "",
-      valor : 0,
-      qtde : 0,
-      pessoas : 0,
-      valorTotal : 0
+      nome : '',
+      valor : '',
+      qtde : '',
+      pessoas : '',
+      valorTotal : ''
     };
     
     $scope.gastosComuns = (sessionStorage.getItem('gastosComuns')===null) ? [] : JSON.parse(sessionStorage.getItem('gastosComuns')); 
@@ -94,11 +96,11 @@
       $scope.gastosComuns.push($scope.gastoComun);
       
       $scope.gastoComun = {
-        nome : "",
-        valor : 0,
-        qtde : 0,
-        pessoas : 0,
-        valorTotal : 0
+        nome : '',
+        valor : '',
+        qtde : '',
+        pessoas : '',
+        valorTotal : ''
       };
       sessionStorage.setItem('gastosComuns',JSON.stringify($scope.gastosComuns));
       $scope.anchor();
@@ -196,9 +198,9 @@
     //Define gasto
     $scope.gasto = {
       nome : '',
-      valor : 0,
-      qtde : 0,
-      valorTotal : 0
+      valor : '',
+      qtde : '',
+      valorTotal : ''
     };
     
     $scope.showGastosComuns = false;
@@ -213,9 +215,9 @@
     $scope.selectNone = function(){
       $scope.gasto = {
         nome : '',
-        valor : 0,
-        qtde : 0,
-        valorTotal : 0
+        valor : '',
+        qtde : '',
+        valorTotal : ''
       };
     };
     
@@ -247,9 +249,9 @@
         //Limpa o gasto
         $scope.gasto = {
           nome : '',
-          valor : 0,
-          qtde : 0,
-          valorTotal : 0
+          valor : '',
+          qtde : '',
+          valorTotal : ''
         };
       }else{
         $mdToast.show( $mdToast.simple().textContent('Item Duplicado').hideDelay(3000) );  
@@ -287,10 +289,14 @@
     };
   });
   
-  myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav, $mdDialog){
+  myApp.controller('AppCtrl', function($scope, $mdMedia, $mdSidenav, $mdDialog, $element){
     $scope.anchor = function(){
       document.getElementById("myAnchor").focus();
       document.getElementById("myAnchor").blur();
+    };
+    
+    $scope.next = function(ev){
+      if(ev.keyCode == 13) document.getElementsByTagName("input")[(angular.element(ev.srcElement)[0].tabIndex)+1].focus();
     };
     
     $scope.toggleLeft = function(){

@@ -8,13 +8,13 @@
 
 <h3 class="page-title">Inserir Grupos:</h3>
 
-<md-button class="md-raised md-primary" ng-click="limpar()" >Excluir Todos</md-button>
-<md-button class="md-raised md-primary" ng-click="inserir()" >Inserir</md-button>
+<md-button class="md-raised md-primary" ng-click="limpar()" tabindex=3>Excluir Todos</md-button>
+<md-button class="md-raised md-primary" ng-click="inserir()" tabindex=2>Inserir</md-button>
 
 <form>
   <md-input-container class="md-block">
     <label>Nome:</label>
-    <input type="text" ng-model="grupo.nome">
+    <input type="text" ng-model="grupo.nome" placeholder="Clique para inserir o nome..." tabindex=1>
   </md-input-container>
 </form>
 
