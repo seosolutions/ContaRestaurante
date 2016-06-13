@@ -26,9 +26,13 @@
       templateUrl : 'views/inserir-grupos.html',
       controller : 'igCtrl'
     })
-    .when('/editar-grupos', {
-      templateUrl : 'views/editar-grupos.html',
-      controller : 'egCtrl'
+    .when('/inserir-gastos', {
+      templateUrl : 'views/inserir-gastos.html',
+      controller : 'inserirGastosCtrl'
+    })
+    .when('/editar-grupo', {
+      templateUrl : 'views/editar-grupo.html',
+      controller : 'editarGrupoCtrl'
     })
     .otherwise ({ redirectTo: '/' });
     
@@ -124,7 +128,9 @@
     $scope.grupo = {
       nome : '',
       gastos : [],
-      valorTotal : 0
+      valorTotal : 0,
+      dividir : '',
+      trocos : []
     };
     
     $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
@@ -148,7 +154,9 @@
         $scope.grupo = {
           nome : '',
           gastos : [],
-          valorTotal : 0
+          valorTotal : 0,
+          dividir : '',
+          trocos : []
         };
         sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));  
       }else{
@@ -183,7 +191,30 @@
     };
   });
   
-  myApp.controller('egCtrl', function($scope, $mdToast){
+  myApp.controller('editarGrupoCtrl', function($scope, $mdToast){
+    window.scrollTo(0,0);
+    $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
+    $scope.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
+    
+    //Encontra o indice do grupo
+    var index = false;
+    for(var i =0; i < $scope.grupos.length; i++){
+      index = index || ( ($scope.grupos[i].nome === $scope.grupo.nome) && i);
+      if (index !== false) break;
+    }
+    
+    console.log($scope.grupo.dividir);
+    
+    $scope.salvarDividir = function(){
+      //Atualiza o Grupo
+      $scope.grupos[index] = $scope.grupo;
+      //Grava o Grupo
+      sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+    };
+    
+  });
+  
+  myApp.controller('inserirGastosCtrl', function($scope, $mdToast){
     window.scrollTo(0,0);
     $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
     $scope.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));

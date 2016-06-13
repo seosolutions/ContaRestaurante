@@ -1,0 +1,8 @@
+<h3 class="page-title">Editar: {{grupo.nome}}</h3>
+
+<form>
+  <md-input-container class="md-block">
+    <label>Deseja dividir o valor desse grupo:</label>
+    <input type="number" ng-model="grupo.dividir" id="myAnchor" placeholder="Clique para inserir a qtde de pessoas p/dividir" tabindex=0 ng-keypress="next($event)" ng-change="salvarDividir()">
+  </md-input-container>
+</form>
