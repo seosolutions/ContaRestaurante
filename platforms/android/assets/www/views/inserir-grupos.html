@@ -25,7 +25,17 @@
       <br>
       <p><span class="card-list-header-1">Valor: </span>{{grupo.valorTotal | currency:"R$ ": 2}}</p>
       <p><span class="card-list-header-1">Valor + 10%: </span>{{ (grupo.valorTotal * 1.1) | currency:"R$ ": 2}}</p>
-      <a href="#editar-grupos" style="text-decoration: none;">
+      <p ng-show="(grupo.dividir != '') && (grupo.dividir !== null)"><span class="card-list-header-1">Valor Dividido Por {{grupo.dividir}}: </span>{{ (grupo.valorTotal / grupo.dividir) | currency:"R$ ": 2}}</p>
+      <p ng-show="(grupo.dividir != '') && (grupo.dividir !== null)"><span class="card-list-header-1">Valor Dividido Por {{grupo.dividir}} + 10%: </span>{{ (grupo.valorTotal / grupo.dividir * 1.1) | currency:"R$ ": 2}}</p>
+      <div ng-show="grupo.trocos.length > 0"  ng-repeat="troco in grupo.trocos track by $index">
+        <p><span class="card-list-header-1">Troco para {{troco.valorPago | currency:"R$ ": 2}}: </span>{{troco.valorAReceber | currency:"R$ ": 2}}</p>
+      </div>
+      <a href="#inserir-gastos" style="text-decoration: none;">
+        <md-button class="md-icon-button" ng-click="editar(grupo)">
+          <md-icon><i class="material-icons">restaurant_menu</i></md-icon>
+        </md-button>
+      </a>
+      <a href="#editar-grupo" style="text-decoration: none;">
         <md-button class="md-icon-button" ng-click="editar(grupo)">
           <md-icon><i class="material-icons">edit</i></md-icon>
         </md-button>

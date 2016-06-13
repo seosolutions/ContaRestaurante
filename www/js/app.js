@@ -203,13 +203,66 @@
       if (index !== false) break;
     }
     
-    console.log($scope.grupo.dividir);
+    $scope.troco = {
+      tipo : "1",
+      gorjeta : 1.1,
+      valorPago : '',
+      valorAReceber : 0
+    };
+    
+    console.log($scope.grupo);
     
     $scope.salvarDividir = function(){
       //Atualiza o Grupo
       $scope.grupos[index] = $scope.grupo;
       //Grava o Grupo
       sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+    };
+    
+    $scope.inserirTroco = function(){
+      //Atualiza o grupo
+      $scope.grupo.trocos.push($scope.troco);
+      $scope.grupos[index] = $scope.grupo;
+      //Grava o Grupo
+      sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+      //Limpa o troco
+      $scope.troco = {
+        tipo : "1",
+        gorjeta : 1.1,
+        valorPago : '',
+        valorAReceber : 0
+      };
+      //Alerta
+      $mdToast.show( $mdToast.simple().textContent('Troco Calculado e Gravado').hideDelay(3000) );  
+    };
+    
+    $scope.calcularTroco = function(){
+      //Calcula o valor a receber
+      console.log($scope.troco);
+      switch($scope.troco.tipo){
+        case "1":
+          $scope.troco.valorAReceber = $scope.troco.valorPago - $scope.grupo.valorTotal * $scope.troco.gorjeta;
+          $scope.inserirTroco();
+          break;
+        case "2":
+          $scope.troco.valorAReceber = $scope.troco.valorPago - ($scope.grupo.valorTotal * $scope.troco.gorjeta / $scope.grupo.dividir);
+          $scope.inserirTroco();
+          break;
+        default:
+          $mdToast.show( $mdToast.simple().textContent('Erro').hideDelay(3000) );
+          break;
+      }
+    };
+    
+    $scope.deletarTroco = function(troco){
+      var ix = $scope.grupo.trocos.indexOf(troco);
+      if(ix > -1) {
+        $scope.grupo.trocos.splice(ix,1);
+        //Atualiza o Grupo
+        $scope.grupos[index] = $scope.grupo;
+        //Grava o Grupo
+        sessionStorage.setItem('grupos',JSON.stringify($scope.grupos));
+      }
     };
     
   });
