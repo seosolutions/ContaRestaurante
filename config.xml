@@ -34,9 +34,11 @@
         <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <access origin="*" browserOnly="true"/>
+    <access origin="whatsapp:*" launch-external="yes" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <allow-intent href="whatsapp:*" />
     </platform>
 </widget>

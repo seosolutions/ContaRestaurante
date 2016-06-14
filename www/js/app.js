@@ -189,6 +189,28 @@
     $scope.editar = function(grupo){
       sessionStorage.setItem('editarGrupo',JSON.stringify(grupo));
     };
+    
+    $scope.shareWhatsapp = function(grupo){
+      //Declara a variavel que armazena a mensagem
+      var text = '';
+      //Monta a mensagem
+      text += grupo.nome + '\n\n';
+      text += '*Valor:* R$ ' + Number(grupo.valorTotal).toFixed(2) + '\n';
+      text += '*Valor + 10%:* R$ ' + Number(grupo.valorTotal * 1.1).toFixed(2) + '\n';
+      if( (grupo.dividir !== '') && (grupo.dividir !== null) ){
+        text += '*Valor Dividido Por ' + grupo.dividir + ":* R$ " + Number(grupo.valorTotal / grupo.dividir).toFixed(2) + '\n';
+        text += '*Valor Dividido Por ' + grupo.dividir + " + 10%:* R$ " + Number(grupo.valorTotal / grupo.dividir * 1.1).toFixed(2) + '\n';
+      }
+      for(var i=0; i<grupo.trocos.length; i++){
+        text += '*Troco para R$ ' + Number(grupo.trocos[i].valorPago).toFixed(2) + ':* R$ ' + Number(grupo.trocos[i].valorAReceber).toFixed(2) + '\n';
+      }
+      text += '\n_Calculado via Conta Restaurante_';
+      //Codifica os caracteres para serem enviados via URL
+      text = encodeURIComponent(text);
+      //Compartilha
+      openDeviceBrowser('whatsapp://send?text=' + text);
+    };
+    
   });
   
   myApp.controller('editarGrupoCtrl', function($scope, $mdToast){
@@ -418,6 +440,18 @@
           $log.debug("close LEFT is done");
         });
     };
+    
+    $scope.shareWhatsapp = function(){
+      //Declara a variavel que armazena a mensagem
+      var text = '';
+      //Monta a mensagem
+      text += 'https://play.google.com/store/apps/details?id=io.iltons.contarestaurante&referrer=utm_source%3Dapp%26utm_medium%3Dshare-link%26utm_campaign%3Dnone';
+      //Codifica os caracteres para serem enviados via URL
+      text = encodeURIComponent(text);
+      //Compartilha
+      openDeviceBrowser('whatsapp://send?text=' + text);
+    };
+    
   });
   
   myApp.directive('toolbar', function(){

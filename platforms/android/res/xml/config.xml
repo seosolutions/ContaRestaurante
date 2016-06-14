@@ -36,6 +36,7 @@
     <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     <allow-intent href="market:*" />
+    <allow-intent href="whatsapp:*" />
     <name>Conta Restaurante</name>
     <description>
         O Conta Restaurante é um aplicativo para ajudar a dividir a conta, em um restaurante ou bar, entre seus amigos e convidados.
@@ -51,6 +52,7 @@
     <preference name="permissions" value="none" />
     <icon src="icon.png" />
     <access browserOnly="true" origin="*" />
+    <access launch-external="yes" origin="whatsapp:*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>
