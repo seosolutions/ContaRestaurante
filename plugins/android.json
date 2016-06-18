@@ -24,6 +24,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.iltons.contarestaurante"
+        },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "io.iltons.contarestaurante"
         }
     },
     "dependent_plugins": {

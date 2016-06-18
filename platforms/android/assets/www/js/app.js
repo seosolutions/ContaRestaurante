@@ -39,6 +39,9 @@
   });
   
   myApp.controller('igualmenteCtrl', function($scope,$mdSidenav){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Dividir Igualmente');  
+    }, false);
     window.scrollTo(0,0);
     $mdSidenav('left').close();
     
@@ -58,6 +61,9 @@
   });
   
   myApp.controller('individualmenteCtrl', function($scope,$mdSidenav){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Dividir Individualmente');  
+    }, false);
     window.scrollTo(0,0);
     $mdSidenav('left').close();
     
@@ -77,6 +83,9 @@
   });
   
   myApp.controller('comunsCtrl',function($scope){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Inserir Gastos Comuns');  
+    }, false);
     window.scrollTo(0,0);
     $scope.gastoComun = {
       nome : '',
@@ -124,6 +133,9 @@
   });
   
   myApp.controller('igCtrl', function($scope,$mdToast){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Inserir Grupos');  
+    }, false);
     window.scrollTo(0,0);
     $scope.grupo = {
       nome : '',
@@ -214,6 +226,9 @@
   });
   
   myApp.controller('editarGrupoCtrl', function($scope, $mdToast){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Editar Grupo');  
+    }, false);
     window.scrollTo(0,0);
     $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
     $scope.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
@@ -290,6 +305,9 @@
   });
   
   myApp.controller('inserirGastosCtrl', function($scope, $mdToast){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Inserir Gastos');  
+    }, false);
     window.scrollTo(0,0);
     $scope.grupos = (sessionStorage.getItem('grupos')===null) ? [] : JSON.parse(sessionStorage.getItem('grupos')); 
     $scope.grupo = JSON.parse(sessionStorage.getItem('editarGrupo'));
@@ -450,6 +468,9 @@
       text = encodeURIComponent(text);
       //Compartilha
       openDeviceBrowser('whatsapp://send?text=' + text);
+      document.addEventListener("deviceready", function(){
+        window.analytics.trackEvent('menu', 'share-app');
+      }, false);
     };
     
   });

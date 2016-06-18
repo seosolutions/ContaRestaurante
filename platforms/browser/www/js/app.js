@@ -39,6 +39,10 @@
   });
   
   myApp.controller('igualmenteCtrl', function($scope,$mdSidenav){
+    document.addEventListener("deviceready", function(){
+      window.analytics.trackView('Screen Title');  
+    }, false);
+    
     window.scrollTo(0,0);
     $mdSidenav('left').close();
     
