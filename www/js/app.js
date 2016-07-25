@@ -1,1 +1,1 @@
-angular.module('ContaRestaurante', ['ngMaterial']);
+angular.module('ContaRestaurante', ['ngMaterial', 'ngRoute']);

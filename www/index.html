@@ -1,24 +1,33 @@
 <html lang="pt-BR" ng-app="ContaRestaurante">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conta Restaurante</title>
+    
+    <!-- Favicon -->
+	  <link rel="icon" href="../icon.png">
+    
+    <!-- Material Icons Font -->
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="vendor/angular_material-1.1.0-rc2/angular-material.min.css">
   </head>
   <body>
     
-    {{"Hello Conta Restaurante"}}
+    <div ng-view></div>
     
     <!-- AngularJs -->
     <script src="vendor/angular-1.5.8/angular.min.js"></script>
     <script src="vendor/angular-1.5.8/angular-animate.min.js"></script>
     <script src="vendor/angular-1.5.8/angular-aria.min.js"></script>
     <script src="vendor/angular-1.5.8/angular-messages.min.js"></script>
+    <script src="vendor/angular-1.5.8/angular-route.min.js"></script>
   
     <!-- Angular Material Library -->
     <script src="vendor/angular_material-1.1.0-rc2/angular-material.min.js"></script>
     
     <!-- App Files -->
     <script src="js/app.js"></script>
+    <script src="js/routes.js"></script>
   </body>
 </html>
