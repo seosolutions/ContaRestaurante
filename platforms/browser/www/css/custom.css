@@ -1,0 +1,20 @@
+body {
+  background-color: #EFEFEF;  
+}
+
+.money-box {
+  margin: 0px;
+  padding: 30px;
+  text-align: center;
+}
+
+.money-box h1 {
+  font-size: 60px;
+  font-weight: normal;
+  color: #424242;
+}
+
+.money-box sup {
+  font-size: 32px;
+  color: #616161;
+}
