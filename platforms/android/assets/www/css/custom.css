@@ -32,3 +32,23 @@ md-switch span {
   max-width: 100%;
   height: auto;
 }
+
+md-sidenav p {
+  margin-left: 18px;
+  margin-bottom: 26px;
+}
+
+md-sidenav span {
+  vertical-align: middle;
+  color: #616161;
+  font-weight: bold;
+  font-size: smaller;
+}
+
+md-sidenav md-icon {
+  margin-right: 25px;
+}
+
+md-sidenav a {
+  text-decoration: none;
+}
