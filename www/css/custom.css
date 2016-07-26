@@ -18,3 +18,12 @@ body {
   font-size: 32px;
   color: #616161;
 }
+
+md-switch {
+  margin-left: 10px !important;
+}
+
+md-switch span {
+  color: #616161;
+  font-weight: bold;
+}
