@@ -6,7 +6,7 @@
           <md-icon><i class="material-icons">menu</i></md-icon>
         </md-button>
         <h2>
-          <span>Conta Restaurante</span>
+          <span>Adicionar Pessoas</span>
         </h2>
       </div>
     </md-toolbar>
@@ -18,20 +18,12 @@
     <menu></menu>
   </div>
   <div flex> <!-- content -->
-    <md-card class="money-box">
+    <md-card class="form-box">
       <md-card-content>
-        <h1><sup>R$</sup> 0,00</h1>
+        <form>
+          <input type="text" placeholder="Insira o nome da(s) pessoa(s)" ng-keypress="PessoasCtrl.pessoaKeyPress($event)">
+        </form>
       </md-card-content>
     </md-card>
-    
-    <md-switch class="md-primary">
-      <span>Exibir valor com gorjeta (10%)</span>
-    </md-switch>
-    
-    <a href="#Pessoas/new">
-      <md-button class="md-fab md-accent" style="position: fixed; bottom: 10px; right: 10px;">
-        <md-icon><i class="material-icons" style="color: #FFF;">person_add</i></md-icon>
-      </md-button>
-    </a>
   </div>
 </div>

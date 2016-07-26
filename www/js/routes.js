@@ -1,10 +1,16 @@
 angular.module('ContaRestaurante')
   .config(function($routeProvider){
     $routeProvider
-      .when('/',{
-        templateUrl : 'views/pessoas/index.html'
+      .when('/', {
+        templateUrl : 'views/Pessoas/index.html',
+        controller : 'PessoasController'
       })
-      .when('/gastos-comuns',{
+      .when('/Pessoas/new', {
+        templateUrl : 'views/Pessoas/new.html',
+        controller : 'PessoasController',
+        controllerAs : 'PessoasCtrl'
+      })
+      .when('/gastos-comuns', {
         templateUrl : 'views/GastosComuns/index.html'
       })
       .otherwise({redirectTo : '/'});

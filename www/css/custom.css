@@ -52,3 +52,21 @@ md-sidenav md-icon {
 md-sidenav a {
   text-decoration: none;
 }
+
+.form-box {
+  margin: 0px; 
+}
+
+.form-box form {
+  margin-bottom: 0px;
+}
+
+.form-box input {
+  border: 0px #FFF solid;
+  width: 250px;
+}
+
+.form-box input:focus {
+  border: 0px #FFF solid;
+  outline: none;
+}
