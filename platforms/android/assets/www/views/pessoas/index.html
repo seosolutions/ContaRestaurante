@@ -8,6 +8,20 @@
         <h2>
           <span>Conta Restaurante</span>
         </h2>
+        <span flex></span>
+        <md-menu md-offset="0 0">
+          <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon><i class="material-icons">more_vert</i></md-icon>
+          </md-button>
+          <md-menu-content >
+            <md-menu-item>
+              <md-button ng-click="PessoasCtrl.deleteAll()">
+                <md-icon><i class="material-icons">delete</i></md-icon>
+                Excluir Todos
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </div>
     </md-toolbar>
   </div>
@@ -28,13 +42,13 @@
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
     
-    <p class="group-label" ng-show="{{(pessoas.length > 0)}}">Pessoas que vão pagar:</p>
+    <p class="group-label" ng-show="pessoas.length > 0">Pessoas que vão pagar:</p>
     
     <md-card class="pessoas-box" ng-repeat="pessoa in pessoas">
       <md-card-content>
         <div layout="row">
           <div flex="15">
-            <img ng-src="{{'img/alphabet/'+pessoa.nome.charAt(0).toLowerCase()+'.png'}}" class="img-responsive img-circle">
+            <img ng-src="{{PessoasCtrl.getAvatar(pessoa)}}" class="img-responsive img-circle">
           </div>
           <div flex="55" class="nome">
             {{pessoa.nome}}

@@ -19,6 +19,11 @@ angular.module('ContaRestaurante')
         pessoas.push(pessoa);
         sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
         return true;
+      },
+      deleteAll : function(){
+        var pessoas = [];
+        sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
+        return pessoas;
       }
     };   
   });
