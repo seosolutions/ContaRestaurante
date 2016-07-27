@@ -1,0 +1,47 @@
+<div layout="row">
+  <div flex>
+    <md-toolbar class="md-whiteframe-6dp">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+          <a ng-href="{{'#/Pessoas/' + routeParams.pessoaId}}">
+          <md-icon><i class="material-icons">arrow_back</i></md-icon>
+          </a>
+        </md-button>
+        <h2>
+          <span>Adicionar Consumo</span>
+        </h2>
+      </div>
+    </md-toolbar>
+  </div>
+</div>
+
+<div layout="row">
+  <div flex="0">
+    <menu></menu>
+  </div>
+  <div flex> <!-- content -->
+    
+    <md-switch class="md-primary">
+      <span>Exibir Gastos Comuns</span>
+    </md-switch>
+  
+    <md-card class="form-box-material">
+      <md-card-content>
+        <form>
+          <md-input-container class="md-block">
+            <input type="text" placeholder="Nome" ng-model="consumo.nome">
+          </md-input-container>
+          
+          <md-input-container class="md-block">
+            <input type="number" placeholder="Valor" ng-model="consumo.valor">
+          </md-input-container>
+          
+          <md-input-container class="md-block">
+            <input type="number" placeholder="Quantidade Pedida" ng-model="consumo.qtde">
+          </md-input-container>
+        </form>
+        <md-button class="md-raised md-primary" ng-click="ConsumosCtrl.create()">Adicionar</md-button>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

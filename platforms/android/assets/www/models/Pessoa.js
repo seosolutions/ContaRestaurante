@@ -6,7 +6,6 @@ angular.module('ContaRestaurante')
           id : 0,
           nome : '',
           consumos : [],
-          valorTotal : 0,
           pessoasParaDividir : 0,
           trocos : []
         };

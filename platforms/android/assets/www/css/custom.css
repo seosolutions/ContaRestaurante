@@ -61,6 +61,18 @@ md-sidenav a {
   text-decoration: none;
 }
 
+.form-box-material {
+  margin: 0px; 
+}
+
+.form-box-material md-card-content {
+  padding: 0px;
+}
+
+.form-box-material form {
+  margin-bottom: 0px;
+}
+
 .form-box {
   margin: 0px; 
 }
