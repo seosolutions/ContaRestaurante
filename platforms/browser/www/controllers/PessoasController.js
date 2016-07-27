@@ -1,12 +1,12 @@
 angular.module('ContaRestaurante')
   .controller('PessoasController', function($scope, $location, $routeParams, Pessoa){
     $scope.pessoas = Pessoa.all();
-    console.log($scope.pessoas);
-    this.getAvatar = function(pessoa){
+    
+    this.getAvatar = function(obj){
       var letras = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
       
-      if(letras.indexOf(pessoa.nome.charAt(0).toLowerCase()) > -1){
-        return 'img/alphabet/' + pessoa.nome.charAt(0).toLowerCase() + '.png';
+      if(letras.indexOf(obj.nome.charAt(0).toLowerCase()) > -1){
+        return 'img/alphabet/' + obj.nome.charAt(0).toLowerCase() + '.png';
       }else{
         return 'img/alphabet/0.png';
       }

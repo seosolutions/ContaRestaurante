@@ -68,6 +68,28 @@
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
     
+    <p class="group-label" ng-show="pessoa.consumos.length > 0">Consumo:</p>
+    
+    <md-card class="consumos-box" ng-repeat="consumo in pessoa.consumos">
+      <md-card-content>
+        <div layout="row">
+          <div flex="15">
+            <img ng-src="{{PessoasCtrl.getAvatar(consumo)}}" class="img-responsive img-circle">
+          </div>
+          <div flex="55" class="info">
+            <p class="title">{{consumo.nome}}</p>
+            <p><span class="title">Valor:</span> R$ {{consumo.valor.toFixed(2)}}</p>
+            <p><span class="title">Qtde:</span> {{consumo.qtde}}</p>
+          </div>
+          <div flex class="info">
+           <span class="title">R$ {{consumo.valorTotal.toFixed(2)}}</span>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+    
+    <div class="bottom-offset"></div>
+    
     <a ng-href="{{'#/Pessoas/'+pessoa.id+'/Consumos/new'}}">
       <md-button class="md-fab md-accent" style="position: fixed; bottom: 10px; right: 10px;">
         <md-icon><i class="material-icons" style="color: #FFF;">restaurant</i></md-icon>

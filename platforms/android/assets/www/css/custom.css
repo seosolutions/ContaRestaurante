@@ -116,3 +116,22 @@ md-sidenav a {
 md-card-content a {
   text-decoration: none;
 }
+
+.consumos-box {
+  margin: 0px;
+  border-bottom: 1px #EEEEEE solid;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.0),0 1px 1px 0 rgba(0,0,0,.0),0 2px 1px -1px rgba(0,0,0,.0);
+}
+
+.consumos-box .info {
+  padding-left: 15px;
+}
+
+.consumos-box p {
+  margin-top: 0px;
+}
+
+.consumos-box .title {
+  color: #616161;
+  font-weight: bold;
+}
