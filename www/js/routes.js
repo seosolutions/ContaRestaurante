@@ -3,7 +3,8 @@ angular.module('ContaRestaurante')
     $routeProvider
       .when('/', {
         templateUrl : 'views/Pessoas/index.html',
-        controller : 'PessoasController'
+        controller : 'PessoasController',
+        controllerAs : 'PessoasCtrl'
       })
       .when('/Pessoas/new', {
         templateUrl : 'views/Pessoas/new.html',
