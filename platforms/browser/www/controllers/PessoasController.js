@@ -3,11 +3,21 @@ angular.module('ContaRestaurante')
     $scope.pessoas = Pessoa.all();
     console.log($scope.pessoas);
     
-    this.pessoaKeyPress = function(ev){
-      if(ev.keyCode == 13){
-        //do some saving here...
-        //Pessoa.create(pessoa)
-        $location.path('/');
-      }
-    };
+    //Action for Pessoas/new
+    if($location.path() === '/Pessoas/new'){
+      //set new person
+      $scope.pessoa = Pessoa.new();
+      //set person's id
+      $scope.pessoa.id = $scope.pessoas.length;
+      
+      //Track for a enter key hit to save
+      this.pessoaKeyPress = function(ev){
+        if(ev.keyCode == 13){
+          Pessoa.create($scope.pessoa);
+          $location.path('/');
+        }
+      };  
+    }// /Pessoas/new
+    
+    
   });

@@ -2,6 +2,19 @@ body {
   background-color: #EFEFEF;  
 }
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.bottom-offset {
+  height: 100px;
+}
+
 .money-box {
   margin: 0px;
   padding: 30px;
@@ -26,11 +39,6 @@ md-switch {
 md-switch span {
   color: #616161;
   font-weight: bold;
-}
-
-.img-responsive {
-  max-width: 100%;
-  height: auto;
 }
 
 md-sidenav p {
@@ -69,4 +77,26 @@ md-sidenav a {
 .form-box input:focus {
   border: 0px #FFF solid;
   outline: none;
+}
+
+.pessoas-box {
+  margin: 0px;
+  border-bottom: 1px #EEEEEE solid;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.0),0 1px 1px 0 rgba(0,0,0,.0),0 2px 1px -1px rgba(0,0,0,.0);
+}
+
+.pessoas-box .nome {
+  padding: 15px;
+  color: #616161;
+  font-weight: bold;
+}
+
+.pessoas-box .valor {
+  padding: 15px;
+  color: #424242;
+}
+
+.group-label {
+  margin-left: 10px;
+  color: #616161;
 }

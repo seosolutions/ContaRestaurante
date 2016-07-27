@@ -28,6 +28,26 @@
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
     
+    <p class="group-label" ng-show="{{(pessoas.length > 0)}}">Pessoas que vão pagar:</p>
+    
+    <md-card class="pessoas-box" ng-repeat="pessoa in pessoas">
+      <md-card-content>
+        <div layout="row">
+          <div flex="15">
+            <img ng-src="{{'img/alphabet/'+pessoa.nome.charAt(0).toLowerCase()+'.png'}}" class="img-responsive img-circle">
+          </div>
+          <div flex="55" class="nome">
+            {{pessoa.nome}}
+          </div>
+          <div flex class="valor">
+            R$ 0,00
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+    
+    <div class="bottom-offset"></div>
+    
     <a href="#Pessoas/new">
       <md-button class="md-fab md-accent" style="position: fixed; bottom: 10px; right: 10px;">
         <md-icon><i class="material-icons" style="color: #FFF;">person_add</i></md-icon>
