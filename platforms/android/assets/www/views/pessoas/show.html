@@ -6,7 +6,7 @@
           <md-icon><i class="material-icons">menu</i></md-icon>
         </md-button>
         <h2>
-          <span>Conta Restaurante</span>
+          <span>{{pessoa.nome}}</span>
         </h2>
         <span flex></span>
         <md-menu md-offset="0 0">
@@ -15,9 +15,33 @@
           </md-button>
           <md-menu-content >
             <md-menu-item>
-              <md-button ng-click="PessoasCtrl.deleteAll()">
+              <md-button ng-click="">
+                <md-icon><i class="material-icons">group</i></md-icon>
+                Dividir o valor
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="">
+                <md-icon><i class="material-icons">attach_money</i></md-icon>
+                Calcular troco
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="">
+                <md-icon><i class="material-icons">share</i></md-icon>
+                Compartilhar o valor
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="PessoasCtrl.delete()">
                 <md-icon><i class="material-icons">delete</i></md-icon>
-                Excluir Todos
+                Excluir pessoa(s)
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="">
+                <md-icon><i class="material-icons">delete_forever</i></md-icon>
+                Excluir todos os consumos
               </md-button>
             </md-menu-item>
           </md-menu-content>
@@ -42,31 +66,9 @@
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
     
-    <p class="group-label" ng-show="pessoas.length > 0">Pessoas que vão pagar:</p>
-    
-    <md-card class="pessoas-box" ng-repeat="pessoa in pessoas">
-      <md-card-content>
-        <a ng-href="{{'#/Pessoas/'+pessoa.id}}">
-        <div layout="row">
-          <div flex="15">
-            <img ng-src="{{PessoasCtrl.getAvatar(pessoa)}}" class="img-responsive img-circle">
-          </div>
-          <div flex="55" class="nome">
-            {{pessoa.nome}}
-          </div>
-          <div flex class="valor">
-            R$ 0,00
-          </div>
-        </div>
-        </a>
-      </md-card-content>
-    </md-card>
-    
-    <div class="bottom-offset"></div>
-    
-    <a href="#Pessoas/new">
+    <a href="#">
       <md-button class="md-fab md-accent" style="position: fixed; bottom: 10px; right: 10px;">
-        <md-icon><i class="material-icons" style="color: #FFF;">person_add</i></md-icon>
+        <md-icon><i class="material-icons" style="color: #FFF;">restaurant</i></md-icon>
       </md-button>
     </a>
   </div>

@@ -1,7 +1,6 @@
 angular.module('ContaRestaurante')
-  .controller('PessoasController', function($scope, $location, Pessoa){
+  .controller('PessoasController', function($scope, $location, $routeParams, Pessoa){
     $scope.pessoas = Pessoa.all();
-    console.log($scope.pessoas);
     
     this.getAvatar = function(pessoa){
       var letras = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -18,14 +17,14 @@ angular.module('ContaRestaurante')
       this.deleteAll = function(){
         $scope.pessoas = Pessoa.deleteAll();
       };
-    }
+    }// /Pessoas/index
     
     //Action for Pessoas/new
     if($location.path() === '/Pessoas/new'){
       //set new person
       $scope.pessoa = Pessoa.new();
       //set person's id
-      $scope.pessoa.id = $scope.pessoas.length;
+      $scope.pessoa.id = parseInt(Date.now());
       
       //Track for a enter key hit to save
       this.pessoaKeyPress = function(ev){
@@ -36,5 +35,14 @@ angular.module('ContaRestaurante')
       };  
     }// /Pessoas/new
     
+    //Action for Pessoas/:id
+    if($routeParams.id !== undefined){
+      $scope.pessoa = Pessoa.find($routeParams.id);
+      
+      this.delete = function(){
+        Pessoa.delete($scope.pessoa.id);
+        $location.path('/');
+      };
+    }// Pessoas/:id
     
   });
