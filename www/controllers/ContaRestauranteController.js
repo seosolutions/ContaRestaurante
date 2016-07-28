@@ -8,6 +8,5 @@ angular.module('ContaRestaurante')
       $mdSidenav('left').close();
     };
     
-    $scope.exibirGorjeta = true;
-    
+    $scope.exibirGorjeta = false;
   });
