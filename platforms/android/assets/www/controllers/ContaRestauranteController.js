@@ -7,4 +7,7 @@ angular.module('ContaRestaurante')
     $scope.closeLeft = function(){
       $mdSidenav('left').close();
     };
+    
+    $scope.exibirGorjeta = true;
+    
   });

@@ -34,11 +34,11 @@
   <div flex> <!-- content -->
     <md-card class="money-box">
       <md-card-content>
-        <h1><sup>R$</sup> {{PessoasCtrl.valorTotal.toFixed(2)}}</h1>
+        <h1><sup>R$</sup> {{ (exibirGorjeta) ?  ( PessoasCtrl.valorTotal * 1.1 ).toFixed(2) : PessoasCtrl.valorTotal.toFixed(2) }}</h1>
       </md-card-content>
     </md-card>
     
-    <md-switch class="md-primary">
+    <md-switch class="md-primary" ng-model="exibirGorjeta">
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
     
@@ -55,7 +55,7 @@
             {{pessoa.nome}}
           </div>
           <div flex class="valor">
-            R$ {{PessoasCtrl.valorTotalPessoa(pessoa).toFixed(2)}}
+            R$ {{ (exibirGorjeta) ? ( PessoasCtrl.valorTotalPessoa(pessoa) * 1.1 ).toFixed(2) : PessoasCtrl.valorTotalPessoa(pessoa).toFixed(2)}}
           </div>
         </div>
         </a>
