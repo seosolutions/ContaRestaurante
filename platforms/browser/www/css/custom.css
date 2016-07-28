@@ -105,7 +105,8 @@ md-sidenav a {
 
 .pessoas-box .valor {
   padding: 15px;
-  color: #424242;
+  color: #616161;
+  font-weight: bold;
 }
 
 .group-label {
@@ -115,6 +116,7 @@ md-sidenav a {
 
 md-card-content a {
   text-decoration: none;
+  color: #616161 !important;
 }
 
 .consumos-box {

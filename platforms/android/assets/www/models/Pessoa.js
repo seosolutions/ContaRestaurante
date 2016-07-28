@@ -41,7 +41,7 @@ angular.module('ContaRestaurante')
         }
         pessoas.splice(index,1);
         sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
-        return true;
+        return pessoas;
       },
       deleteConsumo : function(pessoaId, id){
         //Ler Tabela de Pessoas

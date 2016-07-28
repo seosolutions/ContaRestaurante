@@ -29,11 +29,11 @@
       <md-card-content>
         <form>
           <md-input-container class="md-block">
-            <input type="text" placeholder="Nome" ng-model="consumo.nome">
+            <input type="text" placeholder="Nome" ng-model="consumo.nome" ng-keypress="next($event)">
           </md-input-container>
           
           <md-input-container class="md-block">
-            <input type="number" placeholder="Valor" ng-model="consumo.valor">
+            <input type="number" placeholder="Valor" ng-model="consumo.valor" id="txt_valor">
           </md-input-container>
           
           <md-input-container class="md-block">

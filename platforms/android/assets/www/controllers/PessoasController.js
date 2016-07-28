@@ -24,13 +24,19 @@ angular.module('ContaRestaurante')
       
       this.valorTotal = 0;
       
-      this.atualizaValorTotal = function(){  
+      this.atualizaValorTotal = function(){
+        this.valorTotal = 0;
         for(var i = 0; i < $scope.pessoas.length; i++){
           this.valorTotal += this.valorTotalPessoa($scope.pessoas[i]);
         }
       };
       
       this.atualizaValorTotal();
+      
+      this.delete = function(id){
+        $scope.pessoas = Pessoa.delete(id);
+        this.atualizaValorTotal();  
+      };
       
       this.deleteAll = function(){
         $scope.pessoas = Pessoa.deleteAll();
