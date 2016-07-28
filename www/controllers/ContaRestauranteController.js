@@ -9,4 +9,8 @@ angular.module('ContaRestaurante')
     };
     
     $scope.exibirGorjeta = false;
+    
+    $scope.changeGorjeta = function(){
+      $scope.exibirGorjeta = !$scope.exibirGorjeta;
+    };
   });
