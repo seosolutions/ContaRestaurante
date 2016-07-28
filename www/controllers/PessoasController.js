@@ -43,6 +43,14 @@ angular.module('ContaRestaurante')
         Pessoa.delete($scope.pessoa.id);
         $location.path('/');
       };
+      
+      this.deleteConsumo = function(id){
+        $scope.pessoa = Pessoa.deleteConsumo($scope.pessoa.id, id);
+      };
+      
+      this.deleteConsumoAll = function(){
+        $scope.pessoa = Pessoa.deleteConsumoAll($scope.pessoa.id);
+      };
     }// Pessoas/:id
     
   });
