@@ -57,7 +57,7 @@ angular.module('ContaRestaurante')
         //Encontrar o consumo a ser deletado
         var consumoIndex;
         for(i=0; i < pessoas[pessoaIndex].consumos.length; i++){
-          if(pessoas[pessoaIndex].consumos[i] == id){
+          if(pessoas[pessoaIndex].consumos[i].id == id){
             consumoIndex = i;
             break;
           }

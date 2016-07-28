@@ -41,7 +41,7 @@
               </md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="">
+              <md-button ng-click="PessoasCtrl.deleteConsumoAll()">
                 <md-icon><i class="material-icons">delete_forever</i></md-icon>
                 Excluir todos os consumos
               </md-button>
@@ -60,7 +60,7 @@
   <div flex> <!-- content -->
     <md-card class="money-box">
       <md-card-content>
-        <h1><sup>R$</sup> 0,00</h1>
+        <h1><sup>R$</sup> {{PessoasCtrl.valorTotal.toFixed(2)}}</h1>
       </md-card-content>
     </md-card>
     
@@ -82,7 +82,8 @@
             <p><span class="title">Qtde:</span> {{consumo.qtde}}</p>
           </div>
           <div flex class="info">
-           <span class="title">R$ {{consumo.valorTotal.toFixed(2)}}</span>
+           <p><span class="title">R$ {{consumo.valorTotal.toFixed(2)}}</span></p>
+           <p><md-button class="md-icon-button" ng-click="PessoasCtrl.deleteConsumo(consumo.id)"><md-icon><i class="material-icons">delete</i></md-icon></md-button></p>
           </div>
         </div>
       </md-card-content>

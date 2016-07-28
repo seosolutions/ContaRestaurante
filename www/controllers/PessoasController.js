@@ -14,8 +14,27 @@ angular.module('ContaRestaurante')
     
     //Action for Pessoas/index
     if($location.path() === '/'){
+      this.valorTotalPessoa = function(pessoa){
+        var valorTotal = 0;
+        for(i=0; i < pessoa.consumos.length; i++){
+          valorTotal += pessoa.consumos[i].valorTotal;
+        }
+        return valorTotal;
+      };
+      
+      this.valorTotal = 0;
+      
+      this.atualizaValorTotal = function(){  
+        for(var i = 0; i < $scope.pessoas.length; i++){
+          this.valorTotal += this.valorTotalPessoa($scope.pessoas[i]);
+        }
+      };
+      
+      this.atualizaValorTotal();
+      
       this.deleteAll = function(){
         $scope.pessoas = Pessoa.deleteAll();
+        this.valorTotal = 0;
       };
     }// /Pessoas/index
     
@@ -39,6 +58,15 @@ angular.module('ContaRestaurante')
     if($routeParams.id !== undefined){
       $scope.pessoa = Pessoa.find($routeParams.id);
       
+      this.atualizaValorTotal = function(){
+        this.valorTotal = 0;
+        for(i=0; i < $scope.pessoa.consumos.length ; i++){
+          this.valorTotal += $scope.pessoa.consumos[i].valorTotal;
+        }
+      };
+      
+      this.atualizaValorTotal();
+      
       this.delete = function(){
         Pessoa.delete($scope.pessoa.id);
         $location.path('/');
@@ -46,10 +74,12 @@ angular.module('ContaRestaurante')
       
       this.deleteConsumo = function(id){
         $scope.pessoa = Pessoa.deleteConsumo($scope.pessoa.id, id);
+        this.atualizaValorTotal();
       };
       
       this.deleteConsumoAll = function(){
         $scope.pessoa = Pessoa.deleteConsumoAll($scope.pessoa.id);
+        this.valorTotal = 0;
       };
     }// Pessoas/:id
     
