@@ -15,9 +15,9 @@
           <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
             <md-icon><i class="material-icons">more_vert</i></md-icon>
           </md-button>
-          <md-menu-content >
+          <md-menu-content>
             <md-menu-item>
-              <md-button ng-click="">
+              <md-button  ng-href="{{'#/Pessoas/'+pessoa.id+'/divide'}}">
                 <md-icon><i class="material-icons">group</i></md-icon>
                 Dividir o valor
               </md-button>
@@ -37,7 +37,7 @@
             <md-menu-item>
               <md-button ng-click="PessoasCtrl.delete()">
                 <md-icon><i class="material-icons">delete</i></md-icon>
-                Excluir pessoa(s)
+                Excluir esta(s) pessoa(s)
               </md-button>
             </md-menu-item>
             <md-menu-item>
@@ -67,6 +67,18 @@
     <md-switch class="md-primary" ng-model="exibirGorjeta" ng-change="changeGorjeta()">
       <span>Exibir valor com gorjeta (10%)</span>
     </md-switch>
+    
+    <md-card class="consumos-box" ng-show="pessoa.pessoasParaDividir != '' && pessoa.pessoasParaDividir > 1">
+      <md-card-content>
+        <p>
+          <md-button class="md-icon-button" ng-click="PessoasCtrl.deleteDivide()">
+            <md-icon><i class="material-icons">clear</i></md-icon>
+          </md-button>
+          <span class="title">Valor dividido por {{pessoa.pessoasParaDividir}}: </span>
+          R$ {{ (exibirGorjeta) ?  ( PessoasCtrl.valorTotal * 1.1 / pessoa.pessoasParaDividir ).toFixed(2) : (PessoasCtrl.valorTotal / pessoa.pessoasParaDividir).toFixed(2) }}
+        </p>
+      </md-card-content>
+    </md-card>
     
     <p class="group-label" ng-show="pessoa.consumos.length > 0">Consumo:</p>
     

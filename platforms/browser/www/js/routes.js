@@ -21,6 +21,11 @@ angular.module('ContaRestaurante')
         controller : 'ConsumosController',
         controllerAs : 'ConsumosCtrl'
       })
+      .when('/Pessoas/:pessoaId/divide', {
+        templateUrl : 'views/Pessoas/divide.html',
+        controller : 'PessoasController',
+        controllerAs : 'PessoasCtrl'
+      })
       .when('/gastos-comuns', {
         templateUrl : 'views/GastosComuns/index.html'
       })

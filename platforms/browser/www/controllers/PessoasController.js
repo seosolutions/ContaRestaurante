@@ -87,6 +87,27 @@ angular.module('ContaRestaurante')
         $scope.pessoa = Pessoa.deleteConsumoAll($scope.pessoa.id);
         this.valorTotal = 0;
       };
+      
+      this.deleteDivide = function(){
+        $scope.pessoa = Pessoa.deleteDivide($scope.pessoa);
+      };
     }// Pessoas/:id
+    
+    //Actions for Pessoas/:pessoaId
+    if($routeParams.pessoaId !== undefined){
+      $scope.pessoa = Pessoa.find($routeParams.pessoaId);
+      
+      this.divide = function(ev){
+        if(ev.keyCode == 13){
+          Pessoa.divide($scope.pessoa);
+          $location.path('/Pessoas/' + $scope.pessoa.id);
+        }
+      };
+      
+      this.divideTabPress = function(){
+        Pessoa.divide($scope.pessoa);
+        $location.path('/Pessoas/' + $scope.pessoa.id);
+      };
+    }// Pessoas/:pessoaId
     
   });

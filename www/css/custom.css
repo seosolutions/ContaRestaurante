@@ -83,7 +83,7 @@ md-sidenav a {
 
 .form-box input {
   border: 0px #FFF solid;
-  width: 250px;
+  width: 300px;
 }
 
 .form-box input:focus {
@@ -136,4 +136,9 @@ md-card-content a {
 .consumos-box .title {
   color: #616161;
   font-weight: bold;
+}
+
+md-menu-item button {
+  text-decoration: none;
+  color: inherit !important;
 }

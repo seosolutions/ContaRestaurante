@@ -6,7 +6,7 @@ angular.module('ContaRestaurante')
           id : 0,
           nome : '',
           consumos : [],
-          pessoasParaDividir : 0,
+          pessoasParaDividir : '',
           trocos : []
         };
       },
@@ -89,6 +89,38 @@ angular.module('ContaRestaurante')
         var pessoas = [];
         sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
         return pessoas;
+      },
+      divide : function(pessoa){
+        //Ler Tabela de Pessoas
+        var pessoas = (sessionStorage.getItem('Pessoas')===null) ? [] : JSON.parse(sessionStorage.getItem('Pessoas'));
+        //Encontrar a pessoa com a divisão a ser alterada
+        var pessoaIndex;
+        for(i=0; i < pessoas.length; i++){
+          if(pessoas[i].id == pessoa.id){
+            pessoaIndex = i;
+            break;
+          }
+        }
+        //Altera e salva na tabela
+        pessoas[pessoaIndex] = pessoa;
+        sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
+        return true;
+      },
+      deleteDivide : function(pessoa){
+        //Ler Tabela de Pessoas
+        var pessoas = (sessionStorage.getItem('Pessoas')===null) ? [] : JSON.parse(sessionStorage.getItem('Pessoas'));
+        //Encontrar a pessoa com a divisão a ser alterada
+        var pessoaIndex;
+        for(i=0; i < pessoas.length; i++){
+          if(pessoas[i].id == pessoa.id){
+            pessoaIndex = i;
+            break;
+          }
+        }
+        //Altera e salva na tabela
+        pessoas[pessoaIndex].pessoasParaDividir = '';
+        sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
+        return pessoas[pessoaIndex];
       }
     };   
   });
