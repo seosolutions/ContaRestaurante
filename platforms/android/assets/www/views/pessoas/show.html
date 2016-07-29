@@ -23,7 +23,7 @@
               </md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button ng-click="">
+              <md-button ng-href="{{'#/Pessoas/'+pessoa.id+'/Trocos/new'}}">
                 <md-icon><i class="material-icons">attach_money</i></md-icon>
                 Calcular troco
               </md-button>
@@ -77,6 +77,42 @@
           <span class="title">Valor dividido por {{pessoa.pessoasParaDividir}}: </span>
           R$ {{ (exibirGorjeta) ?  ( PessoasCtrl.valorTotal * 1.1 / pessoa.pessoasParaDividir ).toFixed(2) : (PessoasCtrl.valorTotal / pessoa.pessoasParaDividir).toFixed(2) }}
         </p>
+      </md-card-content>
+    </md-card>
+    
+    <p></p>
+    
+    <md-card class="consumos-box" ng-repeat="troco in pessoa.trocos">
+      <md-card-content>
+        <div layout="row">
+          <div flex="15">
+            <md-button class="md-icon-button" ng-click="PessoasCtrl.deleteTroco(troco.id)">
+              <md-icon><i class="material-icons">clear</i></md-icon>
+            </md-button>
+          </div>
+          
+          <div flex>
+            <div layout="row">
+              <div flex>
+                <span class="title">Valor Pago: </span>
+                R$ {{troco.valorPago.toFixed(2)}}
+              </div>
+            </div>
+            <div layout="row">
+              <div flex>
+                <span class="title">Troco para o valor {{troco.calcularPara}}: </span>
+                <span ng-show=" troco.calcularPara == 'total' ">
+                  R$ {{ (exibirGorjeta) ?  ( troco.valorPago - (PessoasCtrl.valorTotal * 1.1) ).toFixed(2) : (troco.valorPago - PessoasCtrl.valorTotal).toFixed(2) }}
+                </span>
+                <span ng-show=" troco.calcularPara == 'dividido' ">
+                  R$ {{ (exibirGorjeta) ?  ( troco.valorPago - (PessoasCtrl.valorTotal * 1.1 / pessoa.pessoasParaDividir) ).toFixed(2) : (troco.valorPago - (PessoasCtrl.valorTotal / pessoa.pessoasParaDividir) ).toFixed(2) }}
+                </span>
+                
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </md-card-content>
     </md-card>
     

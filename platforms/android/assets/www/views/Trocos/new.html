@@ -1,0 +1,41 @@
+<div layout="row">
+  <div flex>
+    <md-toolbar class="md-whiteframe-6dp">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button">
+          <a ng-href="{{'#/Pessoas/' + routeParams.pessoaId}}">
+          <md-icon><i class="material-icons">arrow_back</i></md-icon>
+          </a>
+        </md-button>
+        <h2>
+          <span>Calcular Troco</span>
+        </h2>
+      </div>
+    </md-toolbar>
+  </div>
+</div>
+
+<div layout="row">
+  <div flex="0">
+    <menu></menu>
+  </div>
+  <div flex> <!-- content -->
+    <md-card class="form-box-material">
+      <md-card-content>
+        <form>
+          <p class="group-label"><strong>Calcular troco para:</strong></p>
+          
+          <md-radio-group ng-model="troco.calcularPara">
+            <md-radio-button value="total">O valor Total</md-radio-button>
+            <md-radio-button value="dividido" ng-show="pessoa.pessoasParaDividir != '' && pessoa.pessoasParaDividir > 1">O Valor Dividido </md-radio-button>
+          </md-radio-group>
+          
+          <md-input-container class="md-block">
+            <input type="number" placeholder="Valor Pago" ng-model="troco.valorPago">
+          </md-input-container>
+        </form>
+        <md-button class="md-raised md-primary" ng-click="TrocosCtrl.create()">Calcular</md-button>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

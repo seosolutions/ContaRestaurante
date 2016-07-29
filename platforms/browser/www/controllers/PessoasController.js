@@ -91,6 +91,11 @@ angular.module('ContaRestaurante')
       this.deleteDivide = function(){
         $scope.pessoa = Pessoa.deleteDivide($scope.pessoa);
       };
+      
+      this.deleteTroco = function(id){
+        $scope.pessoa = Pessoa.deleteTroco($scope.pessoa, id);
+      };
+      
     }// Pessoas/:id
     
     //Actions for Pessoas/:pessoaId

@@ -117,8 +117,41 @@ angular.module('ContaRestaurante')
             break;
           }
         }
-        //Altera e salva na tabela
+        //Altera
         pessoas[pessoaIndex].pessoasParaDividir = '';
+        //Delete trocos para valores divididos
+        var trocos = [];
+        for(i=0; i < pessoas[pessoaIndex].trocos.length; i++){
+          if( pessoas[pessoaIndex].trocos[i].calcularPara == 'total' ){
+            trocos.push(pessoas[pessoaIndex].trocos[i]);
+          }
+        }
+        pessoas[pessoaIndex].trocos = trocos;
+        //Salva
+        sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
+        return pessoas[pessoaIndex];
+      },
+      deleteTroco : function(pessoa, id){
+        //Ler Tabela de Pessoas
+        var pessoas = (sessionStorage.getItem('Pessoas')===null) ? [] : JSON.parse(sessionStorage.getItem('Pessoas'));
+        //Encontrar a pessoa com a divisão a ser alterada
+        var pessoaIndex;
+        for(i=0; i < pessoas.length; i++){
+          if(pessoas[i].id == pessoa.id){
+            pessoaIndex = i;
+            break;
+          }
+        }
+        //Econtra o troco a ser deletado
+        var trocoIndex;
+        for(i=0; i < pessoas[pessoaIndex].trocos.length; i++){
+          if(pessoas[pessoaIndex].trocos[i].id == id){
+            trocoIndex = i;
+            break;
+          }
+        }
+        //Delete e salva
+        pessoas[pessoaIndex].trocos.splice(trocoIndex,1);
         sessionStorage.setItem('Pessoas',JSON.stringify(pessoas));
         return pessoas[pessoaIndex];
       }

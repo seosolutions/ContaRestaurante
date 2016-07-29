@@ -26,6 +26,11 @@ angular.module('ContaRestaurante')
         controller : 'PessoasController',
         controllerAs : 'PessoasCtrl'
       })
+      .when('/Pessoas/:pessoaId/Trocos/new', {
+        templateUrl : 'views/Trocos/new.html',
+        controller : 'TrocosController',
+        controllerAs : 'TrocosCtrl'
+      })
       .when('/gastos-comuns', {
         templateUrl : 'views/GastosComuns/index.html'
       })
