@@ -96,6 +96,32 @@ angular.module('ContaRestaurante')
         $scope.pessoa = Pessoa.deleteTroco($scope.pessoa, id);
       };
       
+      this.shareWhatsapp = function(){
+        var msg = '';
+        
+        msg += '*' + $scope.pessoa.nome + ':* R$ ' + ( ($scope.exibirGorjeta) ?  ( this.valorTotal * 1.1 ).toFixed(2) : this.valorTotal.toFixed(2) ) + '\n';
+        msg += '(Valor ' + (  ($scope.exibirGorjeta) ? 'com' : 'sem' ) + ' gorjeta)' + '\n\n';
+        
+        if($scope.pessoa.pessoasParaDividir !== '' && $scope.pessoa.pessoasParaDividir > 1){
+          msg += '*Valor dividido por ' + $scope.pessoa.pessoasParaDividir + ':* R$ ' + ( ($scope.exibirGorjeta) ?  ( this.valorTotal * 1.1 / $scope.pessoa.pessoasParaDividir ).toFixed(2) : (this.valorTotal / $scope.pessoa.pessoasParaDividir).toFixed(2) ) + '\n\n';
+        }
+        
+        for(i=0; i < $scope.pessoa.trocos.length; i++){
+          msg += '*Valor Pago:* R$ ' + $scope.pessoa.trocos[i].valorPago.toFixed(2) + '\n';
+          msg += '*Troco para o valor ' + $scope.pessoa.trocos[i].calcularPara  + ':* R$ ';
+          msg += ( ($scope.pessoa.trocos[i].calcularPara === 'dividido') ?
+                    ( ($scope.exibirGorjeta) ?  ( $scope.pessoa.trocos[i].valorPago - (this.valorTotal * 1.1 / $scope.pessoa.pessoasParaDividir) ).toFixed(2) : ($scope.pessoa.trocos[i].valorPago - (this.valorTotal / $scope.pessoa.pessoasParaDividir) ).toFixed(2) ) :
+                    ( ($scope.exibirGorjeta) ?  ( $scope.pessoa.trocos[i].valorPago - (this.valorTotal * 1.1) ).toFixed(2) : ($scope.pessoa.trocos[i].valorPago - this.valorTotal ).toFixed(2) ) 
+                  );
+          msg += '\n\n';
+        }
+        
+        msg += '_Calculado via Conta Restaurante_';
+        
+        var text = encodeURIComponent(msg);
+        openDeviceBrowser('whatsapp://send?text=' + text);
+      };
+      
     }// Pessoas/:id
     
     //Actions for Pessoas/:pessoaId
